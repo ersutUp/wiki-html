@@ -1,0 +1,34 @@
+<html>
+    <header>
+        <title>计数器</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@3.2.26/dist/vue.global.js"></script>
+    </header>
+    <body>
+        <div id="app">
+            <h2>当前计数：{{counter}}</h2>
+            <button v-on:click=add>+</button>
+            <button @click="sub">-</button>
+        </div>
+        <script>
+            const args = {
+                data(){
+                    return {
+                        counter:0
+                    }
+                },
+                methods: {
+                    add(){
+                        this.counter++
+                    },
+                    sub(){
+                        this.counter--
+                    }
+                }
+            }
+            //创建vue对象
+            const app = Vue.createApp(args)
+            //挂载管理的dom
+            app.mount("#app")
+        </script>
+    </body>
+</html>

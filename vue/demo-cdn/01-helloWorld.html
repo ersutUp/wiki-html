@@ -1,0 +1,24 @@
+<html>
+    <header>
+        <title>hello-world</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@3.2.26/dist/vue.global.js"></script>
+    </header>
+    <body>
+        <div id="app">
+            <h1>{{text}}</h1>
+        </div>
+        <script>
+            const args = {
+                data(){
+                    return {
+                        text:"hello world"
+                    }
+                }
+            }
+            //创建vue对象
+            const app = Vue.createApp(args)
+            //挂载管理的dom
+            app.mount("#app")
+        </script>
+    </body>
+</html>
