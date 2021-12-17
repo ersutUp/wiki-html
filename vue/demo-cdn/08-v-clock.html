@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-pre</title>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- vue解析后，p标签的 v-cloak 属性会被移除 -->
+        <p v-cloak>{{text}}</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.26/dist/vue.global.js"></script>
+    <script>
+        const args = {
+            data() {
+                return {
+                    text: "文本内容"
+                }
+            }
+        }
+
+        setTimeout(() => {
+            //创建vue对象
+            const app = Vue.createApp(args)
+            //挂载管理的dom
+            app.mount("#app")
+        },1000)
+    </script>
+</body>
+</html>

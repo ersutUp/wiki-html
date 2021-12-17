@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-html</title>
+</head>
+<body>
+    <div id="app">
+        <!-- link 使用mustache展示会以字符串的形式展示出来， 使用v-html可以当html渲染出来 -->
+        <p>{{link}}</p>
+        <p v-html="link"></p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.26/dist/vue.global.js"></script>
+    <script>
+        const args = {
+            data() {
+                return {
+                    link: "<a href='http://github.com'>github</a>"
+                }
+            }
+        }
+        //创建vue对象
+        const app = Vue.createApp(args)
+        //挂载管理的dom
+        app.mount("#app")
+    </script>
+</body>
+</html>

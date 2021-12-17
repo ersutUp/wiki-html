@@ -11,7 +11,7 @@
         </div>
         <script>
             const args = {
-                data(){
+                data() {
                     return {
                         counter:0
                     }
@@ -23,7 +23,10 @@
                     sub(){
                         this.counter--
                     }
-                }
+                },
+                updated() {
+                     console.info("updated")
+                },
             }
             //创建vue对象
             const app = Vue.createApp(args)
