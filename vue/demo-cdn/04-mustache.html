@@ -4,14 +4,14 @@
     </header>
     <body>
         <div id="app">
-            <!-- {{ }} 双括号称为mustache语法 -->
+            <!-- {{ }} 双括号称为mustache语法，mustache只能使用在标签的内容上，标签的属性是不支持mustache的 -->
             <h2>{{msg}}</h2>
             <!-- 支持简单的表达式 -->
             <h2>{{msg + " " + msg2}}</h2>
             <h2>num = {{num}}，num的平方：{{num * num}}</h2>
             
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/vue@3.2.26/dist/vue.global.js"></script>
+        <script src="https://cdn.staticfile.org/vue/3.2.26/vue.global.js"></script>
         <script>
             const args = {
                 data() {

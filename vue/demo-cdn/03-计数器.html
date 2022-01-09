@@ -1,12 +1,13 @@
 <html>
     <header>
         <title>计数器</title>
-        <script src="https://cdn.jsdelivr.net/npm/vue@3.2.26/dist/vue.global.js"></script>
+        <script src="https://cdn.staticfile.org/vue/3.2.26/vue.global.js"></script>
     </header>
     <body>
         <div id="app">
             <h2>当前计数：{{counter}}</h2>
             <button v-on:click=add>+</button>
+            <!-- @ 为 v-on 的缩写 -->
             <button @click="sub">-</button>
         </div>
         <script>
@@ -23,10 +24,7 @@
                     sub(){
                         this.counter--
                     }
-                },
-                updated() {
-                     console.info("updated")
-                },
+                }
             }
             //创建vue对象
             const app = Vue.createApp(args)
