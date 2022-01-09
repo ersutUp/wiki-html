@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>computed(计算属性)</title>
+	<script src="https://cdn.staticfile.org/vue/3.2.26/vue.global.js"></script>
+</head>
+<body>
+	<div id="app">
+		<!-- 以下两种写法比较繁琐 -->
+		<h1>拼接姓名：{{firstName}} {{lastName}}</h1>
+		<h1>mustache拼接姓名：{{firstName + " " + lastName}}</h1>
+		
+		<!-- 当多个地方都需要拼接时，依旧使用拼接的方式，那代码的可阅读性大大降低 -->
+		<h1>mustache拼接姓名：{{firstName + " " + lastName}}</h1>
+		<h1>mustache拼接姓名：{{firstName + " " + lastName}}</h1>
+		<h1>mustache拼接姓名：{{firstName + " " + lastName}}</h1>
+		
+		<!-- 使用方法提高代码可阅读性 -->
+		<h1>方法(第一次调用)：{{getFullName()}}</h1>
+		<h1>方法(第二次调用)：{{getFullName()}}</h1>
+		<!-- 使用计算属性，提高代码可阅读性，并提高性能 -->
+		<h1>计算属性(第一次调用)：{{fullName}}</h1>
+		<!-- 为什么说计算属性相对于方法会提高性能 -->
+		<!-- getFullName方法和fullName计算属性均使用了两次，观察控制台日志getFullName方法的日志打印了两次，而fullName计算属性之打印了一次 -->
+		<h1>计算属性(第二次调用)：{{fullName}}</h1>
+		
+		<!-- 实用性：计算总价格 -->
+		<h2>书籍总价：{{bookTotalPrice}}</h2>
+		
+	</div>
+	<script>
+		const args = {
+			data(){
+				return {
+					firstName:"二飞",
+					lastName:"王",
+					books:[
+						{price:58,name:"MySQL技术内幕"},
+						{price:78,name:"Java编程思想"},
+						{price:125,name:"算法导论"},
+						{price:95,name:"spring boot实战"},
+					]
+				}
+			},
+			computed:{
+				fullName(){
+					console.log("调用 fullName 计算属性")
+					return this.firstName+" "+this.lastName;
+				},
+				bookTotalPrice(){
+					var totalPrice = 0;
+					
+					//使用 in 遍历
+					for (let i in this.books) {
+						totalPrice += this.books[i].price;
+					}
+					//使用 of 遍历
+					//for (let book of this.books) {
+					//	totalPrice += book.price;
+					//}
+					
+					return totalPrice;
+				}
+			},
+			methods:{
+				getFullName(){
+					console.log("调用 getFullName 方法")
+					return this.firstName+" "+this.lastName;
+				}
+			}
+		}
+		//创建vue对象
+		const app = Vue.createApp(args)
+		//挂载管理的dom
+		app.mount("#app")
+	</script>
+</body>
+</html>
