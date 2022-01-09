@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>computed(计算属性的getter和setter方法)</title>
+</head>
+<body>
+	<div id="app">
+		<h1>计算属性：{{fullName}}</h1>
+	</div>
+	<script src="https://cdn.staticfile.org/vue/3.2.26/vue.global.js"></script>
+	<script>
+		const args = {
+			data(){
+				return {
+					firstName:"二飞",
+					lastName:"王"
+				}
+			},
+			computed:{
+				//这是计算属性的简写版
+				//fullName(){
+				//	console.log("调用 fullName 计算属性")
+				//	return this.firstName+" "+this.lastName;
+				//}
+				fullName:{
+					//一般情况下 并不开放set方法（只读属性）
+					//控制台执行 app._instance.ctx.fullName = "一萌 刘" 可以看到效果
+					set(value){
+						console.log("调用 fullName 计算属性的set方法")
+						const fullName = value.split(" ");
+						this.firstName = fullName[0];
+						this.lastName = fullName[1];
+					},
+					//简写版就是实现了这个方法
+					//get方法会缓存返回结果，当函数内的值发生变化时会重新执行get方法并缓存
+					get(){
+						console.log("调用 fullName 计算属性的get方法")
+						return this.firstName+" "+this.lastName;
+					}
+				}
+			}
+		}
+		//创建vue对象
+		const app = Vue.createApp(args)
+		//挂载管理的dom
+		app.mount("#app")
+	</script>
+</body>
+</html>

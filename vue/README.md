@@ -14,4 +14,5 @@
 10. [标签属性使用变量：v-bind](./demo-cdn/09-v-bind.html)
 11. [v-for、v-bind和v-on结合使用](./demo-cdn/10-example-01.html )
 12. [计算属性:computed](./demo-cdn/11-computed.html)
+13. [计算属性进阶:computed](./demo-cdn/12-computed-advanced.html)
 
