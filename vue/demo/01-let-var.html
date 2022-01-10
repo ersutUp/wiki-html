@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES6中的let与var的区别</title>
+</head>
+<body>
+    <script>
+
+        // var忽略作用域 或者说 var没有作用域
+        {
+            var blockScope = "ersut-bolock"
+            console.log("块级作用域输出 blockScope:"+blockScope);
+        }
+        //从这行可以看出var没有块级作用域,其他作用域也是如此
+        console.log("全局作用域输出 blockScope:"+blockScope);
+
+
+        {
+            let blockScopeLet = "let-ersut-bolock"
+            console.log("块级作用域输出 blockScopeLet:"+blockScopeLet);
+        }
+        //从这个判断可以看出let有块级作用域,其他作用域也是如此
+        if(typeof(blockScopeLet) === 'undefined'){
+            console.log("全局作用域中没有blockScopeLet")
+        }
+        
+        //for循环中的实用性
+
+
+    </script>
+</body>
+</html>

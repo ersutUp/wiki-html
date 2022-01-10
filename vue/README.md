@@ -2,6 +2,7 @@
 
 
 
+1. [ES6中的let与var区别](./demo/01-let-var.html)
 1. [hello world](./demo-cdn/01-helloWorld.html)
 2. [列表展示 v-for](./demo-cdn/02-for.html)
 3. [计数器(事件监听 v-on)](./demo-cdn/03-计数器.html)
