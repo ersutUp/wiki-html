@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES6中的字面量增强写法</title>
+</head>
+<body>
+    <script>
+        /* 属性的增强 */
+        let name = "ersut";
+        let age = 18;
+        //ES6之前
+        var obj = {
+            name:name,
+            age:age
+        }
+        console.log("属性的增强ES6之前",obj)
+
+        //ES6之后
+        var objES6 = {
+            name,
+            age
+        }
+        console.log("属性的增强ES6之后",objES6)
+
+        /* 方法的增强 */
+        //ES6之前
+        let obj2 = {
+            func:function(){
+                console.log("ES6之前写法：func:function(){}")
+            }
+        }
+        obj2.func()
+
+        //ES6之后
+        let obj2ES6 = {
+            func(){
+                console.log("ES6写法：func(){}")
+            }
+        }
+        obj2ES6.func()
+    </script>
+</body>
+</html>
