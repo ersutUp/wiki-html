@@ -1,31 +1,31 @@
 <html>
-    <header>
-        <title>mustache</title>
-    </header>
-    <body>
-        <div id="app">
-            <!-- {{ }} 双括号称为mustache语法，mustache只能使用在标签的内容上，标签的属性是不支持mustache的 -->
-            <h2>{{msg}}</h2>
-            <!-- 支持简单的表达式 -->
-            <h2>{{msg + " " + msg2}}</h2>
-            <h2>num = {{num}}，num的平方：{{num * num}}</h2>
-            
-        </div>
-        <script src="https://cdn.staticfile.org/vue/3.2.26/vue.global.js"></script>
-        <script>
-            const args = {
-                data() {
-                    return {
-                        msg: "这是一条消息",
-                        msg2: "这是第二条消息",
-                        num: 2
-                    }
-                }
-            }
-            //创建vue对象
-            const app = Vue.createApp(args)
-            //挂载管理的dom
-            app.mount("#app")
-        </script>
-    </body>
+  <header>
+    <title>mustache</title>
+  </header>
+  <body>
+    <div id="app">
+      <!-- {{ }} 双括号称为mustache语法，mustache只能使用在标签的内容上，标签的属性是不支持mustache的 -->
+      <h2>{{msg}}</h2>
+      <!-- 支持简单的表达式 -->
+      <h2>{{msg + " " + msg2}}</h2>
+      <h2>num = {{num}}，num的平方：{{num * num}}</h2>
+      
+    </div>
+    <script src="https://cdn.staticfile.org/vue/3.2.26/vue.global.js"></script>
+    <script>
+      const args = {
+        data() {
+          return {
+            msg: "这是一条消息",
+            msg2: "这是第二条消息",
+            num: 2
+          }
+        }
+      }
+      //创建vue对象
+      const app = Vue.createApp(args)
+      //挂载管理的dom
+      app.mount("#app")
+    </script>
+  </body>
 </html>

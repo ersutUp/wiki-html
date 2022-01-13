@@ -1,24 +1,24 @@
 <html>
-    <header>
-        <title>for</title>
-        <script src="https://cdn.staticfile.org/vue/3.2.26/vue.global.js"></script>
-    </header>
-    <body>
-        <div id="app">
-            <div v-for="(item, index) in movies">{{index+1}}、{{item}}</div>
-        </div>
-        <script>
-            const args = {
-                data(){
-                    return {
-                        movies:["摔跤吧，爸爸","阿甘正传","星际穿越","让子弹飞"]
-                    }
-                }
-            }
-            //创建vue对象
-            const app = Vue.createApp(args)
-            //挂载管理的dom
-            app.mount("#app")
-        </script>
-    </body>
+  <header>
+    <title>for</title>
+    <script src="https://cdn.staticfile.org/vue/3.2.26/vue.global.js"></script>
+  </header>
+  <body>
+    <div id="app">
+      <div v-for="(item, index) in movies">{{index+1}}、{{item}}</div>
+    </div>
+    <script>
+      const args = {
+        data(){
+          return {
+            movies:["摔跤吧，爸爸","阿甘正传","星际穿越","让子弹飞"]
+          }
+        }
+      }
+      //创建vue对象
+      const app = Vue.createApp(args)
+      //挂载管理的dom
+      app.mount("#app")
+    </script>
+  </body>
 </html>

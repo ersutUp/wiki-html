@@ -1,55 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>v-for、v-bind和v-on结合使用</title>
-    <style>
-        .red{
-            color: red
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-for、v-bind和v-on结合使用</title>
+  <style>
+    .red{
+      color: red
+    }
+  </style>
 </head>
 <body>
-    <div id="app">
-        <!-- 点谁谁红 其他保持不变 再点击可变会原来颜色 （多选）-->
-        <div v-for="(item, index) in movies" :class="firstColor(index)" @click="changeRed(index)">{{index+1}}、{{item}}</div>
-        <br/>
-        <!-- 点到谁谁红，其他取消红色样式 (单选)-->
-        <div v-for="(item, index) in movies" :class="{'red': index == currIndex }" @click="changeRed2(index)">{{index+1}}、{{item}}</div>
-    </div>
-    <script src="https://cdn.staticfile.org/vue/3.2.26/vue.global.js"></script>
-    <script>
-        const args = {
-            data(){
-                return {
-                    movies:["摔跤吧，爸爸","阿甘正传","星际穿越","让子弹飞"],
-                    isRed:[],
-                    currIndex: 0
-                }
-            },
-            methods: {
-                firstColor:function(i){
-                    // 这个判断是为了解决点击后再获取class时跳过初始化isRed (isRed更新后调用firstColor)
-                    if(this.movies.length != this.isRed.length){
-                        //初始化isRed
-                        this.isRed[i] = false
-                    }
-                    return {"red":this.isRed[i]}
-                },
-                changeRed: function(i){
-                    this.isRed[i] = !this.isRed[i];
-                },
-                changeRed2: function(i){
-                    this.currIndex = i
-                }
-            },
+  <div id="app">
+    <!-- 点谁谁红 其他保持不变 再点击可变会原来颜色 （多选）-->
+    <div v-for="(item, index) in movies" :class="firstColor(index)" @click="changeRed(index)">{{index+1}}、{{item}}</div>
+    <br/>
+    <!-- 点到谁谁红，其他取消红色样式 (单选)-->
+    <div v-for="(item, index) in movies" :class="{'red': index == currIndex }" @click="changeRed2(index)">{{index+1}}、{{item}}</div>
+  </div>
+  <script src="https://cdn.staticfile.org/vue/3.2.26/vue.global.js"></script>
+  <script>
+    const args = {
+      data(){
+        return {
+          movies:["摔跤吧，爸爸","阿甘正传","星际穿越","让子弹飞"],
+          isRed:[],
+          currIndex: 0
         }
-        //创建vue对象
-        const app = Vue.createApp(args)
-        //挂载管理的dom
-        app.mount("#app")
-    </script>
+      },
+      methods: {
+        firstColor:function(i){
+          // 这个判断是为了解决点击后再获取class时跳过初始化isRed (isRed更新后调用firstColor)
+          if(this.movies.length != this.isRed.length){
+            //初始化isRed
+            this.isRed[i] = false
+          }
+          return {"red":this.isRed[i]}
+        },
+        changeRed: function(i){
+          this.isRed[i] = !this.isRed[i];
+        },
+        changeRed2: function(i){
+          this.currIndex = i
+        }
+      },
+    }
+    //创建vue对象
+    const app = Vue.createApp(args)
+    //挂载管理的dom
+    app.mount("#app")
+  </script>
 </body>
 </html>

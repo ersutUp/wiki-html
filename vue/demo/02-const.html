@@ -1,39 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ES6中的const</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ES6中的const</title>
 </head>
 <body>
+  
+  <script>
+    /* 1、不会修改的标识符使用 const 来定义，称为常量 */
+    const name = "ersut"
+
+    /* 2、常量在定义时就需要进行初始化，即对其赋值 */
+    //下面这样会报错的
+    //const age;
     
-    <script>
-        /* 1、不会修改的标识符使用 const 来定义，称为常量 */
-        const name = "ersut"
+    /* 3、常量不能修改 */
+    try{
+      //这行会报错
+      name = "王二飞"
+    } catch(e){
+      console.error(e)
+    }
 
-        /* 2、常量在定义时就需要进行初始化，即对其赋值 */
-        //下面这样会报错的
-        //const age;
-        
-        /* 3、常量不能修改 */
-        try{
-            //这行会报错
-            name = "王二飞"
-        } catch(e){
-            console.error(e)
-        }
+    /* 3、常量中定义的对象或数组 可以对其内容修改 */
+    const obj = {
+      name:"ersut",
+      age:18
+    }
+    console.log(obj)
 
-        /* 3、常量中定义的对象或数组 可以对其内容修改 */
-        const obj = {
-            name:"ersut",
-            age:18
-        }
-        console.log(obj)
+    obj.name = "王二飞"
+    console.log(obj)
 
-        obj.name = "王二飞"
-        console.log(obj)
-
-    </script>
+  </script>
 </body>
 </html>

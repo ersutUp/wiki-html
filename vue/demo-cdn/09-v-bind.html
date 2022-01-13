@@ -1,126 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>v-bind</title>
-    <style>
-        .blue{
-            color: blue
-        }
-        .red{
-            color: red
-        }
-        .font25{
-            font-size: 25px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-bind</title>
+  <style>
+    .blue{
+      color: blue
+    }
+    .red{
+      color: red
+    }
+    .font25{
+      font-size: 25px;
+    }
+  </style>
 </head>
 <body>
-    <div id="app">
+  <div id="app">
   
-        <!-- v-bind 简单使用 -->
-        <fieldset>
-            <legend>v-bind 简单使用</legend>
-            <img src="icon" alt="错误示例">
-            <br/>
-            <!-- 通过v-bind给属性绑定变量 -->
-            <img v-bind:src="icon" alt="">
-            <br/>
-            <!-- : 为 v-bind的缩写即语法糖 -->
-            <img :src="icon" alt="">
-            <button @click="bilibili">更换小破站图标</button>
-        </fieldset>
+    <!-- v-bind 简单使用 -->
+    <fieldset>
+      <legend>v-bind 简单使用</legend>
+      <img src="icon" alt="错误示例">
+      <br/>
+      <!-- 通过v-bind给属性绑定变量 -->
+      <img v-bind:src="icon" alt="">
+      <br/>
+      <!-- : 为 v-bind的缩写即语法糖 -->
+      <img :src="icon" alt="">
+      <button @click="bilibili">更换小破站图标</button>
+    </fieldset>
 
 
-        <br/>
-        <!-- v-bind 动态绑定class -->
-        <fieldset>
-            <legend>v-bind 动态绑定class</legend>
-            <!-- <p :class="{类名:boolean,类名:boolean}">class对象语法</p> -->
+    <br/>
+    <!-- v-bind 动态绑定class -->
+    <fieldset>
+      <legend>v-bind 动态绑定class</legend>
+      <!-- <p :class="{类名:boolean,类名:boolean}">class对象语法</p> -->
 
-            <!-- class绑定对象实现多个class切换使用，当value值为true时使用key的同名类（class） -->
-            <p :class="{'blue':isBlue,red:isRed}">class对象语法</p>
-            
-            <!-- 上边的写法比较累赘，可使用方法返回数组 -->
-            <p :class="classes()">class对象语法（方法）</p>
-            
-            <!-- 绑定class 与 普通class 不冲突，最终会合并在一起 -->
-            <p :class="classes()" class="font25">class对象语法（与普通class不冲突）</p>
-            <button @click="changeColor">点击变色</button>
+      <!-- class绑定对象实现多个class切换使用，当value值为true时使用key的同名类（class） -->
+      <p :class="{'blue':isBlue,red:isRed}">class对象语法</p>
+      
+      <!-- 上边的写法比较累赘，可使用方法返回数组 -->
+      <p :class="classes()">class对象语法（方法）</p>
+      
+      <!-- 绑定class 与 普通class 不冲突，最终会合并在一起 -->
+      <p :class="classes()" class="font25">class对象语法（与普通class不冲突）</p>
+      <button @click="changeColor">点击变色</button>
 
-            <p :class="['font25',color]">class数组语法</p>
-            
-        </fieldset>
+      <p :class="['font25',color]">class数组语法</p>
+      
+    </fieldset>
 
-        <br/>
-        <!-- v-bind 动态绑定style -->
-        <fieldset>
-            <legend>v-bind 动态绑定style</legend>
-            <!-- <p :style="{属性名:属性值,类名:属性值}">style对象语法</p> -->
-            
-            <!-- 属性名可以使用短横线分隔的原生样式名 也可使用对应的驼峰格式 -->
-            <p :style="{fontSize: font30+'px',color: 'red'}">style对象语法-驼峰</p>
-            <!-- 短横线分隔的原生样式名作为key需要单引号包住 -->
-            <p :style="{'font-size': font30+'px',color: 'red'}">style对象语法-原生</p>
+    <br/>
+    <!-- v-bind 动态绑定style -->
+    <fieldset>
+      <legend>v-bind 动态绑定style</legend>
+      <!-- <p :style="{属性名:属性值,类名:属性值}">style对象语法</p> -->
+      
+      <!-- 属性名可以使用短横线分隔的原生样式名 也可使用对应的驼峰格式 -->
+      <p :style="{fontSize: font30+'px',color: 'red'}">style对象语法-驼峰</p>
+      <!-- 短横线分隔的原生样式名作为key需要单引号包住 -->
+      <p :style="{'font-size': font30+'px',color: 'red'}">style对象语法-原生</p>
 
-            <!-- 上边的写法比较累赘，可使用方法返回数组 -->
-            <p :style="styles()">style对象语法（方法）</p>
-            
-            <!-- 绑定style 与 普通style 不冲突，最终会合并在一起 -->
-            <p :style="styles()" style="font-weight:700">style对象语法（与普通style不冲突）</p>
-            <button @click="changeSize">点击变大</button>
+      <!-- 上边的写法比较累赘，可使用方法返回数组 -->
+      <p :style="styles()">style对象语法（方法）</p>
+      
+      <!-- 绑定style 与 普通style 不冲突，最终会合并在一起 -->
+      <p :style="styles()" style="font-weight:700">style对象语法（与普通style不冲突）</p>
+      <button @click="changeSize">点击变大</button>
 
-            <p :style="[font30Sty,fontColorSty]">class数组语法</p>
-            
-        </fieldset>
+      <p :style="[font30Sty,fontColorSty]">class数组语法</p>
+      
+    </fieldset>
 
-    </div>
-    <script src="https://cdn.staticfile.org/vue/3.2.26/vue.global.js"></script>
-    <script>
-        const args = {
-            data() {
-                return {
-                    icon: "https://www.baidu.com/favicon.ico",
-                    
-                    // 动态绑定class
-                    isRed: true,
-                    isBlue: false,
-                    color: 'blue',
+  </div>
+  <script src="https://cdn.staticfile.org/vue/3.2.26/vue.global.js"></script>
+  <script>
+    const args = {
+      data() {
+        return {
+          icon: "https://www.baidu.com/favicon.ico",
+          
+          // 动态绑定class
+          isRed: true,
+          isBlue: false,
+          color: 'blue',
 
-                    // 动态绑定style
-                    font30: 30,
-                    font30Sty: {fontSize: '30px'},
-                    fontColorSty: {color: 'red'}
+          // 动态绑定style
+          font30: 30,
+          font30Sty: {fontSize: '30px'},
+          fontColorSty: {color: 'red'}
 
-                }
-            },
-            methods: {
-                bilibili:function(){
-                    this.icon = "https://www.bilibili.com/favicon.ico"
-                },
-                changeColor:function(){
-                    this.isRed = !this.isRed
-                    this.isBlue = !this.isBlue
-                    // this.isBlue = (this.isRed=this.isBlue) == false;
-                },
-                classes:function(){
-                    return {'blue':this.isBlue,'red':this.isRed}
-                },
-                styles:function(){
-                    return {fontSize: this.font30+'px',color: 'red'}
-                },
-                changeSize:function(){
-                    this.font30 = this.font30 + 5
-                },
-            },
         }
+      },
+      methods: {
+        bilibili:function(){
+          this.icon = "https://www.bilibili.com/favicon.ico"
+        },
+        changeColor:function(){
+          this.isRed = !this.isRed
+          this.isBlue = !this.isBlue
+          // this.isBlue = (this.isRed=this.isBlue) == false;
+        },
+        classes:function(){
+          return {'blue':this.isBlue,'red':this.isRed}
+        },
+        styles:function(){
+          return {fontSize: this.font30+'px',color: 'red'}
+        },
+        changeSize:function(){
+          this.font30 = this.font30 + 5
+        },
+      },
+    }
 
-        //创建vue对象
-        const app = Vue.createApp(args)
-        //挂载管理的dom
-        app.mount("#app")
-    </script>
+    //创建vue对象
+    const app = Vue.createApp(args)
+    //挂载管理的dom
+    app.mount("#app")
+  </script>
 </body>
 </html>

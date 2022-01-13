@@ -1,71 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ES6中的let与var的区别</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ES6中的let与var的区别</title>
 </head>
 <body>
-    <fieldset>
-        <legend>使用let处理</legend>
-        <button class="let">按钮1</button>
-        <button class="let">按钮2</button>
-        <button class="let">按钮3</button>
-    </fieldset>
-    <fieldset>
-        <legend>使用var处理</legend>
-        <button class="var">按钮1</button>
-        <button class="var">按钮2</button>
-        <button class="var">按钮3</button>
-    </fieldset>
-    <script>
+  <fieldset>
+    <legend>使用let处理</legend>
+    <button class="let">按钮1</button>
+    <button class="let">按钮2</button>
+    <button class="let">按钮3</button>
+  </fieldset>
+  <fieldset>
+    <legend>使用var处理</legend>
+    <button class="var">按钮1</button>
+    <button class="var">按钮2</button>
+    <button class="var">按钮3</button>
+  </fieldset>
+  <script>
 
-        /* var忽略作用域 或者说 var没有作用域 */
-        {
-            var blockScope = "ersut-bolock"
-            console.log("块级作用域输出 blockScope:"+blockScope);
-        }
-        //从这行可以看出var没有块级作用域,其他作用域也是如此
-        console.log("全局作用域输出 blockScope:"+blockScope);
-
-
-        {
-            let blockScopeLet = "let-ersut-bolock"
-            console.log("块级作用域输出 blockScopeLet:"+blockScopeLet);
-        }
-        //从这个判断可以看出let有块级作用域,其他作用域也是如此
-        if(typeof(blockScopeLet) === 'undefined'){
-            console.log("全局作用域中没有blockScopeLet")
-        }
-        
-        /*let在for循环中的实用性*/
-        let buttonLets = document.getElementsByClassName("let")
-        for(let i = 0; i < buttonLets.length; i++){
-            buttonLets[i].addEventListener("click",function(){
-                console.log("点击了第"+i+"个按钮")
-            })
-        }
-        //代码不变使用 var 定义 i 所带来的问题
-        //由于var没有作用域,所以在监听函数中取到的是 i 最后循环结束的值。
-        //相同的代码却无法实现同样的功能
-        let buttonVars = document.getElementsByClassName("var")
-        for(var i = 0; i < buttonVars.length; i++){
-            buttonVars[i].addEventListener("click",function(){
-                console.log("点击了第"+i+"个按钮")
-            })
-        }
-
-        //借助闭包，使用 var 实现这个功能
-        for(var i = 0; i < buttonVars.length; i++){
-            (function(num){
-                buttonVars[num].addEventListener("click",function(){
-                    console.log("点击了第"+num+"个按钮")
-                })
-            })(i)
-        }
+    /* var忽略作用域 或者说 var没有作用域 */
+    {
+      var blockScope = "ersut-bolock"
+      console.log("块级作用域输出 blockScope:"+blockScope);
+    }
+    //从这行可以看出var没有块级作用域,其他作用域也是如此
+    console.log("全局作用域输出 blockScope:"+blockScope);
 
 
-    </script>
+    {
+      let blockScopeLet = "let-ersut-bolock"
+      console.log("块级作用域输出 blockScopeLet:"+blockScopeLet);
+    }
+    //从这个判断可以看出let有块级作用域,其他作用域也是如此
+    if(typeof(blockScopeLet) === 'undefined'){
+      console.log("全局作用域中没有blockScopeLet")
+    }
+    
+    /*let在for循环中的实用性*/
+    let buttonLets = document.getElementsByClassName("let")
+    for(let i = 0; i < buttonLets.length; i++){
+      buttonLets[i].addEventListener("click",function(){
+        console.log("点击了第"+i+"个按钮")
+      })
+    }
+    //代码不变使用 var 定义 i 所带来的问题
+    //由于var没有作用域,所以在监听函数中取到的是 i 最后循环结束的值。
+    //相同的代码却无法实现同样的功能
+    let buttonVars = document.getElementsByClassName("var")
+    for(var i = 0; i < buttonVars.length; i++){
+      buttonVars[i].addEventListener("click",function(){
+        console.log("点击了第"+i+"个按钮")
+      })
+    }
+
+    //借助闭包，使用 var 实现这个功能
+    for(var i = 0; i < buttonVars.length; i++){
+      (function(num){
+        buttonVars[num].addEventListener("click",function(){
+          console.log("点击了第"+num+"个按钮")
+        })
+      })(i)
+    }
+
+
+  </script>
 </body>
 </html>
