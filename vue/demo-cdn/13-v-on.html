@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-on的使用</title>
+</head>
+<body>
+  <div id="app">
+    <h1>计数：{{counter}}</h1>
+    <!-- 基础使用 -->
+    <fieldset>
+      <legend>基础使用</legend>
+      <!-- 直接写逻辑（不推荐） -->
+      <button v-on:click="counter++">+(表达式)</button>
+      <!-- 调用方法（推荐） -->
+      <button v-on:click="add">+(调用方法)</button>
+
+      <!-- 语法糖用法 -->
+      <button @click="add">+(语法糖)</button>
+    </fieldset>
+
+    <!-- 参数传递 -->
+    <fieldset>
+      <legend>参数传递</legend>
+      <!-- 无参数，可忽略 () -->
+      <button @click="add">+(忽略括号)</button>
+      <button @click="add()">+(不忽略括号)</button>
+      <br/>
+
+      <!-- 有参数时，忽略括号，vue将自动传入 原生事件event 到方法的第一个参数 -->
+      <button @click="func1">+(忽略括号，传入原生时间event)</button>
+      <br/>
+
+      <!-- 传入 原生事件event 并传入其他参数 -->
+      <button @click="func1($event,'这是第二个参数')">+(传入 原生事件event 并传入其他参数)</button>
+      <!-- 通过 $event 可指定 event 参数位置 -->
+      <button @click="func2('这是第一个参数',$event)">+(指定 event 参数位置)</button>
+      <br/>
+      <!-- vue中的 属性或方法 作为参数传递 -->
+      <button @click="func3(init,func1)">初始化计数器(vue中的 属性或方法 作为参数传递)</button>
+    </fieldset>
+
+    <!-- v-on的修饰符 -->
+    <fieldset>
+      <legend>v-on的修饰符</legend>
+      <!-- .stop 阻止事件冒泡 -->
+      <div @click="divClick">
+        <button @click="buttonClick">事件冒泡</button>
+        <button @click.stop="buttonClick">阻止事件冒泡</button>
+      </div>
+
+      <!-- .prevent 阻止标签的默认事件 -->
+      <form action="http://baidu.com">
+        <button type="submit" @click="submitClick">form提交</button>
+        <button type="submit" @click.prevent="submitClick">form提交（阻止默认事件）</button>
+      </form>
+
+      <!-- .{keyCode|keyAlias} 监听键盘某个按键 -->
+      <!-- 监听回车键抬起 -->
+      <input @keyup.enter="onEnter($event)"/>
+
+      <!-- .native (还不会) -->
+
+      <!-- .once 监听只执行一次 -->
+      <button @click.once="onceClick">执行一次</button>
+    </fieldset>
+  </div>
+  <script src="https://cdn.staticfile.org/vue/3.2.26/vue.global.js"></script>
+  <script>
+    const args = {
+      data(){
+        return {
+          counter: 0,
+          init:0,
+        }
+      },
+      methods:{
+        add(){
+          this.counter++
+        },
+        func1(event,arg){
+          console.log("func1-event",event)
+          console.log("func1-arg",arg)
+        },
+        func2(arg,event){
+          console.log("func2-arg",arg)
+          console.log("func2-event",event)
+        },
+        func3(arg,func){
+          console.log("func3-arg",arg)
+          console.log("func3-func",func)
+          this.counter = arg
+          func()
+        },
+
+        buttonClick(){
+          console.log("buttonClick")
+        },
+        divClick(){
+          console.log("divClick")
+        },
+        submitClick(){
+          console.log("submitClick")
+        },
+        onEnter(event){
+          console.log("当前输入内容",event.currentTarget.value)
+        },
+        onceClick(){
+          console.log("只执行一次")
+        }
+      }
+    }
+    //创建vue对象
+    const app = Vue.createApp(args)
+    //挂载管理的dom
+    app.mount("#app")
+  </script>
+</body>
+</html>
