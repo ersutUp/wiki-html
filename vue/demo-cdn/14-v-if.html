@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-if、v-else-if、v-else 条件判断的使用</title>
+</head>
+<body>
+  <div id="app">
+
+    <fieldset>
+      <legend>基础使用</legend>
+      <h1 v-if="score >= 90">优秀</h1>
+      <h1 v-else-if="score >= 60">中等</h1>
+      <h1 v-else>差</h1>
+
+      <label>分数：</label>
+      <input type="text" v-model="score"/>
+    </fieldset>
+    
+    <fieldset>
+      <legend>实践：切换登录方式</legend>
+      <span v-if="isUser">
+        <label for="userName">用户账户</label>
+        <input type="text" placeholder="请输入用户账户" id="userName"/>
+      </span>
+      <span v-else>
+        <label for="userEmail">用户邮箱</label>
+        <input type="text" placeholder="请输入用户邮箱" id="userEmail"/>
+      </span>
+      <button @click="isUser = !isUser" >更换登录方式</button>
+    </fieldset>
+  </div>
+  <script src="https://cdn.staticfile.org/vue/3.2.26/vue.global.js"></script>
+  <script>
+    const args = {
+      data(){
+        return {
+          score: 0,
+          isUser: true
+        }
+      },
+      methods:{
+        
+      }
+    }
+    //创建vue对象
+    const app = Vue.createApp(args)
+    //挂载管理的dom
+    app.mount("#app")
+  </script>
+</body>
+</html>
