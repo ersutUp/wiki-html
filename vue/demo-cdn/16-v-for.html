@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-for遍历循环的使用</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 遍历数组 -->
+    <fieldset>
+      <legend>遍历数组</legend>
+      <ul>
+        <li v-for="item in movies">{{item}}</li>
+      </ul>
+    </fieldset>
+
+    <!-- 遍历数组的同时获取索引 -->
+    <fieldset>
+      <legend>遍历数组的同时获取索引</legend>
+      <ul>
+        <li v-for="(item,index) in movies">{{index+1}}.{{item}}</li>
+      </ul>
+    </fieldset>
+
+    <br/>
+
+    <!-- 遍历对象（获取value值） -->
+    <fieldset>
+      <legend>遍历对象（获取value值）</legend>
+      <ul>
+        <li v-for="value in info">{{value}}</li>
+      </ul>
+    </fieldset>
+
+    <!-- 遍历对象（获取value值、key值） -->
+    <fieldset>
+      <legend>遍历对象（获取value值、key值）</legend>
+      <ul>
+        <li v-for="(value,key) in info">key:{{key}},value:{{value}}</li>
+      </ul>
+    </fieldset>
+
+    <!-- 遍历对象（获取value值、key值和索引） -->
+    <fieldset>
+      <legend>遍历对象（获取value值、key值和索引）</legend>
+      <ul>
+        <li v-for="(value,key,index) in info">{{index+1}}. key:{{key}},value:{{value}}</li>
+      </ul>
+    </fieldset>
+
+    <!-- v-for 高级 -->
+    <fieldset>
+      <legend>v-for 高级</legend>
+      <ul>
+        <!-- 
+          使用key可优化vue的性能，对应的值必须是唯一的且对应该行数据
+          在中间插入值时才能体现出性能，比较直观的一个方式是 在谷歌的调试器中观察 dom 树的改变（改变的dom会闪烁） 
+         -->
+        <li v-for="book in books" :key="book.id">{{book.name}}</li>
+      </ul>
+      <ul>
+        <!-- 没有 key 的 做对比用 -->
+        <li v-for="book in books">{{book.name}}</li>
+      </ul>
+      <button @click="inster">中间插入一行</button>
+    </fieldset>
+
+  </div>
+  <script src="https://cdn.staticfile.org/vue/3.2.26/vue.global.js"></script>
+  <script>
+    const args = {
+      data(){
+        return {
+          movies:["摔跤吧，爸爸","阿甘正传","星际穿越","让子弹飞"],
+          info:{
+            name:"王二飞",
+            age:18
+          },
+          books:[
+            {id:1,name:"Java编程思想"},
+            {id:2,name:"算法导论"},
+            {id:3,name:"spring boot实战"},
+          ]
+        }
+      },
+      methods:{
+        inster(){
+          this.books.splice(2,0,{id:4,name:"MySQL技术内幕"})
+        }
+      }
+    }
+    //创建vue对象
+    const app = Vue.createApp(args)
+    //挂载管理的dom
+    app.mount("#app")
+  </script>
+</body>
+</html>
