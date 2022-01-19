@@ -22,4 +22,5 @@
 16. [v-if、v-else-if、v-else 条件判断的使用](./demo-cdn/14-v-if.html)
 16. [v-show的使用](./demo-cdn/15-v-show.html)
 16. [v-for遍历循环的使用](./demo-cdn/16-v-for.html)
+16. [数组中的响应式（vue3.0以下版本需注意，示例中为 vue3.0）](./demo-cdn/17-array.html)
 

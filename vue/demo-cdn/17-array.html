@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数组中的响应式</title>
+  <style>
+    .div50{
+      display: inline-block;
+      width: 50%;
+      height: 500px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="div50">
+      <fieldset>
+        <legend>电影列表</legend>
+      <ul>
+        <li v-for="item in movies">{{item}}</li>
+      </ul>
+      </fieldset>
+    </div>
+
+    <div class="div50">
+      <fieldset>
+        <legend>数组可响应式的几个方法</legend>
+        <button @click="pushBtn()">push()</button>
+        <br/>
+        
+        <button @click="popBtn()">pop()</button>
+        <br/>
+        
+        <button @click="shiftBtn()">shift()</button>
+        <br/>
+        
+        <button @click="unshiftBtn()">unshift()</button>
+        <br/>
+        <br/>
+        
+        <button @click="spliceDelBtn()">splice()-删除</button>
+        <button @click="spliceInsertBtn()">splice()-插入</button>
+        <button @click="spliceReplaceBtn()">splice()-替换</button>
+        <br/>
+        <br/>
+        
+        <button @click="sortBtn()">sort()</button>
+        <br/>
+        
+        <button @click="reverseBtn()">reverse()</button>
+        <br/>
+      </fieldset>
+
+      <fieldset>
+        <legend>通过下标直接修改数组中没有响应式(vue2.0中存在此问题，3.0已解决)</legend>
+        <button @click="indexBtn">movies[0]</button>
+        <p>这个问题可以通过splice方法来解决</p>
+      </fieldset>
+    </div>
+  </div>
+  <script src="https://cdn.staticfile.org/vue/3.2.26/vue.global.js"></script>
+  <script>
+    const movie = "反贪风暴"
+    const args = {
+      data(){
+        return {
+          movies:["摔跤吧，爸爸","阿甘正传","星际穿越","让子弹飞"]
+        }
+      },
+      methods:{
+        pushBtn(){
+          this.movies.push("长津湖")
+        },
+        popBtn(){
+          this.movies.pop()
+        },
+        shiftBtn(){
+          this.movies.shift()
+        },
+        unshiftBtn(){
+          this.movies.unshift("活着")
+        },
+
+        spliceDelBtn(){
+          this.movies.splice(1,2)
+        },
+        spliceInsertBtn(){
+          this.movies.splice(2,0,"泰囧")
+        },
+        spliceReplaceBtn(){
+          this.movies.splice(1,1,"你好，李焕英")
+        },
+        
+        sortBtn(){
+          this.movies.sort()
+        },
+        reverseBtn(){
+          this.movies.reverse()
+        },
+
+        indexBtn(){
+          this.movies[0] = movie
+        }
+      }
+    }
+    //创建vue对象
+    const app = Vue.createApp(args)
+    //挂载管理的dom
+    app.mount("#app")
+  </script>
+</body>
+</html>
