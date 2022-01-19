@@ -20,3 +20,5 @@
 16. [计算属性进阶:computed](./demo-cdn/12-computed-advanced.html)
 16. [v-on事件监听的使用](./demo-cdn/13-v-on.html)
 16. [v-if、v-else-if、v-else 条件判断的使用](./demo-cdn/14-v-if.html)
+16. [v-show的使用](./demo-cdn/15-v-show.html)
+
