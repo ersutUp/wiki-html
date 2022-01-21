@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>购物车</title>
+  <style>
+    table {
+      border-spacing: 0px;
+    }
+    table td,table th {
+      border: 1px solid #000;
+      padding: 3px;
+    }
+    table th {
+      border: 1px solid rgb(141, 141, 141);
+      background-color: #ccc;
+    }
+    .number {
+      padding: 0 5px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div v-if="shoppings == [] || shoppings == ''">
+      <p>当前购物车为空</p>
+    </div>
+    <div v-else>
+      <table>
+        <thead>
+          <tr>
+            <th>序号</th>
+            <th>书籍名称</th>
+            <th>出版日期</th>
+            <th>价格</th>
+            <th>购买数量</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(shop,index) in shoppings">
+            <td>{{index+1}}</td>
+            <td>{{shop.name}}</td>
+            <td>{{shop.publishDate}}</td>
+            <td>{{showPrice(shop.price)}}</td>
+            <td><button @click="decrease(index)">-</button><span class="number">{{shop.number}}</span><button @click="add(index)">+</button></td>
+            <td><button @click="del(index)">删除</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        总价：{{showPrice(totalPrice)}}
+      </p>
+    </div>
+  </div>
+  <script src="https://cdn.staticfile.org/vue/3.2.26/vue.global.js"></script>
+  <script>
+    const args = {
+      data(){
+        return {
+          shoppings:[
+            {
+              name:"《算法导论》",
+              publishDate:"2006-09",
+              price: 85.00,
+              number: 1
+            },
+            {
+              name:"《UNIX编程艺术》",
+              publishDate:"2006-02",
+              price: 59.00,
+              number: 1
+            },
+            {
+              name:"《编程珠玑》",
+              publishDate:"2008-10",
+              price: 39.00,
+              number: 1
+            },
+            {
+              name:"《代码大全》",
+              publishDate:"2006-03",
+              price: 128.00,
+              number: 1
+            },
+          ]
+        }
+      },
+      computed:{
+        totalPrice(){
+          if(this.shoppings == []){
+            return 0;
+          }
+          let total = 0;
+          for (const shop of this.shoppings) {
+            total += shop.price * shop.number
+          }
+          return total;
+        }
+      },
+      methods:{
+        del(index){
+          this.shoppings.splice(index,1)
+        },
+        decrease(index){
+          let num = this.shoppings[index].number
+          if(num <= 0){
+            return
+          }
+          this.shoppings[index].number--
+        },
+        add(index){
+          this.shoppings[index].number++
+        },
+        showPrice(price){
+          return '￥' + price.toFixed(2);
+        }
+      }
+    }
+    //创建vue对象
+    const app = Vue.createApp(args)
+    //挂载管理的dom
+    app.mount("#app")
+  </script>
+</body>
+</html>

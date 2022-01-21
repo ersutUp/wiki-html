@@ -23,4 +23,6 @@
 16. [v-show的使用](./demo-cdn/15-v-show.html)
 16. [v-for遍历循环的使用](./demo-cdn/16-v-for.html)
 16. [数组中的响应式（vue3.0以下版本需注意，示例中为 vue3.0）](./demo-cdn/17-array.html)
+22. [购物车demo](./demo-cdn/18-shopping-cart.html)
+    1. vue3中移除了过滤器，推荐使用计算属性或方法代替
 
