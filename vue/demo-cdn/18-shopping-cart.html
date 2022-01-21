@@ -40,12 +40,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(shop,index) in shoppings">
-            <td>{{index+1}}</td>
+          <tr v-for="(shop,index) in shoppings" :key="shop.id">
+            <td>{{shop.id}}</td>
             <td>{{shop.name}}</td>
             <td>{{shop.publishDate}}</td>
             <td>{{showPrice(shop.price)}}</td>
-            <td><button @click="decrease(index)">-</button><span class="number">{{shop.number}}</span><button @click="add(index)">+</button></td>
+            <td><button @click="decrease(index)" :disabled = "shop.number <= 1">-</button><span class="number">{{shop.number}}</span><button @click="add(index)">+</button></td>
             <td><button @click="del(index)">删除</button></td>
           </tr>
         </tbody>
@@ -62,24 +62,28 @@
         return {
           shoppings:[
             {
+              id: 1,
               name:"《算法导论》",
               publishDate:"2006-09",
               price: 85.00,
               number: 1
             },
             {
+              id: 2,
               name:"《UNIX编程艺术》",
               publishDate:"2006-02",
               price: 59.00,
               number: 1
             },
             {
+              id: 3,
               name:"《编程珠玑》",
               publishDate:"2008-10",
               price: 39.00,
               number: 1
             },
             {
+              id: 4,
               name:"《代码大全》",
               publishDate:"2006-03",
               price: 128.00,
@@ -105,10 +109,6 @@
           this.shoppings.splice(index,1)
         },
         decrease(index){
-          let num = this.shoppings[index].number
-          if(num <= 0){
-            return
-          }
           this.shoppings[index].number--
         },
         add(index){
