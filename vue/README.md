@@ -5,6 +5,7 @@
 1. [ES6中的let与var区别](./demo/01-let-var.html)
 2. [ES6中的常量：const](./demo/02-const.html)
 3. [ES6中的字面量增强写法](./demo/03-literal.html)
+3. [ES6中的高阶函数](./demo/04-higher-order-func.html)
 4. [hello world](./demo-cdn/01-helloWorld.html)
 5. [列表展示 v-for](./demo-cdn/02-for.html)
 6. [计数器(事件监听 v-on)](./demo-cdn/03-计数器.html)
@@ -23,6 +24,6 @@
 16. [v-show的使用](./demo-cdn/15-v-show.html)
 16. [v-for遍历循环的使用](./demo-cdn/16-v-for.html)
 16. [数组中的响应式（vue3.0以下版本需注意，示例中为 vue3.0）](./demo-cdn/17-array.html)
-22. [购物车demo](./demo-cdn/18-shopping-cart.html)
+23. [购物车demo](./demo-cdn/18-shopping-cart.html)
     1. vue3中移除了过滤器，推荐使用计算属性或方法代替
 
