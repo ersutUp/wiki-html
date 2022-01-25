@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-model的使用、原理以及修饰符</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 基础使用 -->
+    <fieldset>
+      <legend>基本使用</legend>
+      <fieldset>
+        <legend>文本框</legend>
+        <input type="text" v-model="textInput">
+        <h2>文本框的内容为：{{textInput}}</h2>
+      </fieldset>
+      <fieldset>
+        <legend>单选按钮：radio</legend>
+        <!-- v-model支持互斥，可以不用name了 -->
+        <label for="man">
+          <input type="radio" value="男" id="man" v-model="sex">男
+        </label>
+        <label for="woman">
+          <input type="radio" value="女" id="woman" v-model="sex">女
+        </label>
+        <h2>您当前所选的是：{{sex}}</h2>
+      </fieldset>
+      <fieldset>
+        <legend>单选框：checkbox</legend>
+        <!-- checkbox下单选时v-model绑定的应是一个布尔型 -->
+        <label for="agreement">
+          <input type="checkbox" id="agreement" v-model="isConsent">同意协议
+        </label>
+        <h2>是否同意协议：{{isConsent}}</h2>
+      </fieldset>
+      <fieldset>
+        <legend>多选框：checkbox</legend>
+        <!-- checkbox下多选时v-model绑定的必须是一个数组 -->
+        <label for="bike">
+          <input type="checkbox" id="bike" value="骑车" v-model="hobbies">骑车
+        </label>
+        <label for="basketball">
+          <input type="checkbox" id="basketball" value="篮球" v-model="hobbies">篮球
+        </label>
+        <label for="football">
+          <input type="checkbox" id="football" value="足球" v-model="hobbies">足球
+        </label>
+        <h2>您当前所选的是：{{hobbies}}</h2>
+      </fieldset>
+      <fieldset>
+        <legend>下拉框（单选）：select</legend>
+        <select v-model="food">
+          <option value="面包">面包</option>
+          <option value="披萨">披萨</option>
+          <option value="馒头">馒头</option>
+        </select>
+        <h2>您当前所选的是：{{food}}</h2>
+      </fieldset>
+      <fieldset>
+        <legend>下拉框（多选）：select</legend>
+        <select v-model="computer" multiple>
+          <option value="显示器">显示器</option>
+          <option value="键盘">键盘</option>
+          <option value="主机">主机</option>
+          <option value="鼠标">鼠标</option>
+          <option value="音响">音响</option>
+          <option value="摄像头">摄像头</option>
+        </select>
+        <h2>您当前所选的是：{{computer}}</h2>
+      </fieldset>
+    </fieldset>
+
+    <!-- 实现原理 -->
+    <fieldset>
+      <legend>实现原理</legend>
+      <!-- v-model就是v-bind与v-on的结合 -->
+      v-bind与v-on结合:<input type="text" :value="textInput" @input="textInput = $event.currentTarget.value">
+      <br>
+      <!-- 比较 -->
+      v-model:<input type="text" v-model="textInput">
+      <h2>文本框的内容为：{{textInput}}</h2>
+    </fieldset>
+
+    <!-- 值绑定：通过服务器获取要显示的数据 -->
+    <fieldset>
+      <legend>值绑定</legend>
+      <label v-for="item in fruitOptions" :for="item+'id'">
+        <input type="checkbox" :id="item+'id'" :value="item" v-model="fruits">{{item}}
+      </label>
+      <h2>您当前所选的是：{{fruits}}</h2>
+    </fieldset>
+
+    <!-- 修饰符 -->
+    <fieldset>
+      <legend>修饰符</legend>
+
+      <fieldset>
+        <legend>lazy：失去焦点或者按下回车时更新绑定的属性</legend>
+        默认修饰符：<input type="text" v-model="textInput">
+        <br>
+        lazy修饰符：<input type="text" v-model.lazy="textInput">
+        <h2>文本框的内容为：{{textInput}}</h2>
+      </fieldset>
+
+      <fieldset>
+        <legend>number：属性使用number类型</legend>
+        默认修饰符：<input type="text" v-model="age">
+        <br>
+        <!-- 注意输入内容也需要做控制 -->
+        number修饰符：<input type="number" v-model.number="age">
+        <h2>输入的内容为：{{age}},类型为：{{typeof age}}</h2>
+      </fieldset>
+
+      <fieldset>
+        <legend>trim：清除前后的空格</legend>
+        <h2>在下面两个文本框内的内容前输入空格，看看有什么不同</h2>
+        默认修饰符：<input type="text" v-model="textInput">
+        <br>
+        trim修饰符：<input type="text" v-model.trim="textInput">
+        <h2>文本框的内容为：<input disabled :value="textInput"></h2>
+      </fieldset>
+
+      
+      <fieldset>
+        <legend>多个作用域可以同时使用</legend>
+        <h2>下面的示例为同时使用 trim lazy 两个作用域</h2>
+        <input type="text" v-model.trim.lazy="textInput">
+        <h2>文本框的内容为：<input disabled :value="textInput"></h2>
+      </fieldset>
+
+    </fieldset>
+
+    <!-- trim：清除前后的空格 -->
+    
+
+  </div>
+  <script src="https://cdn.staticfile.org/vue/3.2.26/vue.global.js"></script>
+  <script>
+    const args = {
+      data(){
+        return {
+          textInput: "哈喽",
+          sex:'女',
+          isConsent: false,
+          hobbies:["骑车"],
+          food:"面包",
+          computer:[],
+          fruits:["西瓜"],
+          fruitOptions:["橙子","香蕉","橘子","西瓜"],
+          age:18
+        }
+      },
+      methods:{
+      }
+    }
+    //创建vue对象
+    const app = Vue.createApp(args)
+    //挂载管理的dom
+    app.mount("#app")
+  </script>
+</body>
+</html>
