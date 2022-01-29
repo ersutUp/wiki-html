@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>组件的通信</title>
+</head>
+<body>
+  <div id="app">
+    <info :name="ersut.name" :age="ersut.age" :hobbies="ersut.hobbies" :sex="ersut.sex" :max-height="ersut.maxHeight"></info>
+    <info :name="ersut.name" :age="3" :hobbies="['篮球','羽毛球']" :sex="ersut.sex" :max-height="ersut.maxHeight"></info>
+  </div>
+
+  <template id="info">
+    <div>
+      <h2>{{name}}</h2>
+      <h5>年龄：{{age}}</h5>
+      <h5>性别：{{sex}}</h5>
+      <h5>能长多高：{{maxHeight}}m</h5>
+      <h5 v-if="hobbies.length != 0">
+          爱好：
+          <span v-for="item in hobbies">{{item}},</span>
+      </h5>
+    </div>
+  </template>
+  <script src="https://cdn.staticfile.org/vue/3.2.26/vue.global.js"></script>
+  <script>
+    const info = {
+      template: "#info",
+      //给组件传值
+      props: {
+        //类型检查，可以是多个
+        name: [String,Number],
+        //自定义数据验证
+        age:{
+          validator(value){
+            return 0 <= value
+          },
+          default: 0
+        },
+
+        //默认值，object/array 需要用函数返回
+        hobbies: {
+          type: Array,
+          default(){
+            return []
+          }
+        },
+
+        //是否必传
+        sex:{
+          //默认是false
+          required: true,
+          validator(value){
+            return value==='男' || value === '女'
+          },
+        },
+
+        //驼峰命名后对应标签内使用短横线分隔命名
+        maxHeight: Number
+
+      },
+      //组件通知上级
+    }
+    const args = {
+      data(){
+        return {
+          ersut: {
+            name:"王二飞",
+            age:18,
+            sex:"男",
+            hobbies: ["骑车","爬山"],
+            maxHeight: 9999
+          }
+        }
+      },
+      methods:{
+      },
+      components:{
+        info
+      }
+    }
+
+    //创建vue对象
+    const app = Vue.createApp(args)
+
+    //挂载管理的dom
+    app.mount("#app")
+
+  </script>
+</body>
+</html>
