@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>组件化</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 
+      2、使用组件
+
+      组件的使用只能在vue管理的标签内
+    -->
+    <info></info>
+    <!-- 验证：在注册之后可以用在任何新创建的组件中 -->
+    <info2></info2>
+    <list></list>
+
+    <table_cpn></table_cpn>
+    <cpn2></cpn2>
+  </div>
+  <!-- 在这里使用组件的，是不能生效的 -->
+  <info></info>
+
+  <template id="cpn2-template">
+    <fieldset>
+      <h2>cpn2组件</h2>
+    </fieldset>
+  </template>
+  <script src="https://cdn.staticfile.org/vue/3.2.26/vue.global.js"></script>
+  <script>
+    const tableCpn = {
+          template:`
+            <fieldset>
+              <h2>table组件</h2>
+              <table>
+                <tr v-for="item in 5">
+                  <td v-for="td_item in 3">{{item}}-{{td_item}}</td>
+                </tr>
+              </table>
+            </fieldset>
+          `
+        }
+    const args = {
+      data(){
+        return {
+          
+        }
+      },
+      methods:{
+      },
+      components:{
+        /* 局部组件 */
+        list:{
+          template:`
+            <fieldset>
+              <h2>list组件</h2>
+              <ul>
+                <li v-for="item in 10">{{item}}列表</li>
+              </ul>
+              <h4>全局组件可在局部组件中直接使用</h4>
+              <cpn1></cpn1>
+              <h4>局部组件中使用局部组件需要在components中引入</h4>
+              <table_cpn1></table_cpn1>
+            </fieldset>
+          `,
+          components:{
+            //局部组件使用局部组件需要在components中引入
+            table_cpn1:tableCpn
+          }
+        },
+        table_cpn:tableCpn
+      }
+    }
+    //创建vue对象
+    const app = Vue.createApp(args)
+    
+    /* 全局组件:在注册之后可以用在任何新创建的组件中 */
+    // 1、创建组件（这里是全局组件的注册）
+    app.component("info",{
+      template:`
+        <fieldset>
+          <h2>info组件</h2>
+          <h3>王二飞</h3>
+          <h5>性别：男</h5>
+        </fieldset>
+      `
+    })
+    // 2、组件的使用，使用在上边的 div.app 中
+
+    /* 验证：在注册之后可以用在任何新创建的组件中，即所有组件中可以使用全局组件 */
+    const cpn1 = {
+      template:`
+        <fieldset>
+          <h2>cpn1组件</h2>
+          <h5>年龄：18</h5>
+        </fieldset>
+      `,
+    }
+    app.component("cpn1",cpn1)
+
+    app.component("info2",{
+      template:`
+        <fieldset>
+          <h2>info2组件</h2>
+          <h3>王二飞</h3>
+          <h5>性别：男</h5>
+          <cpn1></cpn1>
+        </fieldset>
+      `
+    })
+
+    /* 模板抽离 */
+    app.component("cpn2",{
+      template: "#cpn2-template"
+    })
+
+    //挂载管理的dom
+    app.mount("#app")
+
+  </script>
+</body>
+</html>

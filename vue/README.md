@@ -27,3 +27,8 @@
 23. [购物车demo](./demo-cdn/18-shopping-cart.html)
     1. vue3中移除了过滤器，推荐使用计算属性或方法代替
 24. [v-model的使用、原理以及修饰符](./demo-cdn/19-v-model.html)
+25. [组件化](./demo-cdn/20-component.html)
+    1. 全局组件
+    2. 局部组件
+    3. 组件中使用其他组件
+    4. 模板抽离
