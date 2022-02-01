@@ -8,27 +8,35 @@
 </head>
 <body>
   <div id="app">
-    <info :name="ersut.name" :age="ersut.age" :hobbies="ersut.hobbies" :sex="ersut.sex" :max-height="ersut.maxHeight"></info>
+    <info :name="ersut.name" :age="ersut.age" :hobbies="ersut.hobbies" :sex="ersut.sex" :max-height="ersut.maxHeight" @change-age-listen="infoChange"></info>
     <info :name="ersut.name" :age="3" :hobbies="['篮球','羽毛球']" :sex="ersut.sex" :max-height="ersut.maxHeight"></info>
   </div>
 
   <template id="info">
     <div>
       <h2>{{name}}</h2>
-      <h5>年龄：{{age}}</h5>
+      <h5>年龄：{{changeAge}}</h5>
       <h5>性别：{{sex}}</h5>
       <h5>能长多高：{{maxHeight}}m</h5>
       <h5 v-if="hobbies.length != 0">
           爱好：
           <span v-for="item in hobbies">{{item}},</span>
       </h5>
+      <div>
+        <input type="number" v-model.lazy="changeAge" @change="sendParent">
+      </div>
     </div>
   </template>
   <script src="https://cdn.staticfile.org/vue/3.2.26/vue.global.js"></script>
   <script>
     const info = {
       template: "#info",
-      //给组件传值
+      data(){
+        return {
+          changeAge:this.age
+        }
+      },
+      /* 给组件传值 */
       props: {
         //类型检查，可以是多个
         name: [String,Number],
@@ -61,7 +69,21 @@
         maxHeight: Number
 
       },
-      //组件通知上级
+      methods:{
+        sendParent(){
+          console.log("change age",this.changeAge)
+          /* 组件通知上级（自定义事件）*/
+          this.$emit("changeAgeListen",this.changeAge)
+        }
+      },
+      emits:{
+        /* 验证自定义事件 */
+        changeAgeListen:(value)=>{
+          console.log("changeAgeListen validate",value)
+          return value >= 0
+        }
+      }
+      
     }
     const args = {
       data(){
@@ -76,6 +98,9 @@
         }
       },
       methods:{
+        infoChange(age){
+          console.log("infoChange",age)
+        }
       },
       components:{
         info
