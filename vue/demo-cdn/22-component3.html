@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>组件的双向绑定</title>
+</head>
+<body>
+  <div id="app">
+    <!-- v-model:number3.number 中的 .number 保证数值为数字类型，去掉后给num3赋值会报错  -->
+    <cpn
+      :number1="num1"
+      @change-num1-listen="changeNum1"
+      :number2="num2"
+      @change-num2-listen="changeNum2"
+      v-model:number3.number="num3"
+    />
+  </div>
+
+  <template id="cpn">
+    <div>
+      <h5>根据v-model原理实现：{{number1}}</h5>
+      <input type="number" :value="number1" @input="input1">
+
+      <h5>通过 watch 实现：{{dNumber2}}</h5>
+      <input type="number" v-model="dNumber2">
+      
+      <h5>vue3语法糖：{{number3}}</h5>
+      <input type="number" :value="number3" @input="$emit('update:number3',$event.target.value)">
+      
+      </div>
+    </div>
+  </template>
+  <script src="https://cdn.staticfile.org/vue/3.2.26/vue.global.js"></script>
+  <script>
+    const cpn = {
+      template: "#cpn",
+      data(){
+        return {
+          dNumber2:this.number2,
+        }
+      },
+      /* 给组件传值 */
+      props: {
+        number1:Number,
+        number2:Number,
+        number3:Number,
+      },
+      methods:{
+        input1(event){
+          const val = event.target.value
+          console.log("change dNumber1",val)
+
+          /* 组件通知上级（自定义事件）*/
+          this.$emit("changeNum1Listen",val)
+        }
+      },
+      watch:{
+        dNumber2(val){
+          console.log("watch dNumber2",val)
+          this.$emit("changeNum2Listen",val)
+        }
+      },
+      emits:{
+        // update:number3 固定格式 update:prop属性名，vue3内部实现update:number3事件并在组件上使用，实现双向绑定必须写
+        'update:number3':null
+      }
+    }
+    const args = {
+      data(){
+        return {
+          num1: 1,
+          num2: 2,
+          num3: 3,
+        }
+      },
+      methods:{
+        changeNum1(changeValue){
+          changeValue = parseInt(changeValue)
+          console.log("changeNumber1",changeValue)
+          this.num1 = changeValue
+          console.log("this.num1",this.num1)
+        },
+        changeNum2(changeValue){
+          changeValue = parseInt(changeValue)
+          console.log("changeNumber2",changeValue)
+          this.num2 = changeValue
+          console.log("this.num2",this.num2)
+        }
+      },
+      components:{
+        cpn
+      }
+    }
+
+    //创建vue对象
+    const app = Vue.createApp(args)
+
+    //挂载管理的dom
+    app.mount("#app")
+
+  </script>
+</body>
+</html>

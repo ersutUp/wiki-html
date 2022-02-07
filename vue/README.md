@@ -35,4 +35,8 @@
 26. [组件的通信](./demo-cdn/21-component2.html)
     1. 传值
     2. 组件通知上级（自定义事件）
+27. [组件的双向绑定](./demo-cdn/22-component3.html)
+    1. 手动实现
+    2. 通过watch优化
+    3. vue3中自带的语法糖
 
