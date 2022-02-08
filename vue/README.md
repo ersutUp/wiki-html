@@ -40,3 +40,17 @@
     2. 通过watch优化
     3. vue3中自带的语法糖
 
+28. [父子组件的访问](./demo-cdn/23-component4.html)
+    1. 父访问子组件：
+       1. $children（vue3中没有了）
+       2. $refs
+
+    2. 子访问父组件：
+       1. $parent
+          1. 完全访问父组件，因为 $parent 直接拿到了父组件对象
+
+       2. Provide / Inject
+          1. 相比 $parent， Provide / Inject对权限可控
+
+    3. 子组件访问根组件：$root
+

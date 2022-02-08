@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>组件的双向绑定</title>
+</head>
+<body>
+  <!-- 父访问子组件 -->
+  <div id="app1">
+    <fieldset>
+      <legend>父访问子组件:$refs</legend>
+      <!-- ref是重点 -->
+      <cpn1 ref="cpn1_1" name="cpn1杠1"></cpn1>
+      <cpn1 ref="cpn1_2" name="cpn1杠2"></cpn1>
+      <cpn1 name="cpn1杠3"></cpn1>
+      <button @click="btn1">修改子组件 cpn1杠2 的值</button>
+    </fieldset>
+  </div>
+  <template id="cpn1">
+    <div>
+      <h1>我是子组件:{{name}}</h1>
+      <h3>num:{{num}}</h3>
+    </div>
+  </template>
+
+  <!-- 子访问父组件 -->
+  <div id="app2">
+    <fieldset>
+      <legend>子访问父组件:$parent</legend>
+      <cpn2></cpn2>
+      <button @click="btn2">修改 num2 的值</button>
+    </fieldset>
+    <fieldset>
+      <legend>子访问父组件:Provide/Inject</legend>
+      <cpn3></cpn3>
+      <button @click="changeNum3">修改 num3 的值</button>
+    </fieldset>
+  </div>
+  <template id="cpn2">
+    <div>
+      <fieldset>
+        <legend>我是子组件cpn2</legend>
+        <h3>父组件的值：num2 -> {{$parent.num2}}</h3>
+        <button @click="btn3">修改父组件的 num2 的值</button>
+      </fieldset>
+    </div>
+  </template>
+  <template id="cpn3">
+    <div>
+      <fieldset>
+        <legend>我是子组件cpn3</legend>
+        <h3>父组件的值(非响应式)：num3 -> {{parentNum3}}</h3>
+        <h3>父组件的值(响应式)：num3 -> {{respParentNum3.value}}</h3>
+        <button @click="changeNum3Method">修改父组件的 num3 的值</button>
+      </fieldset>
+    </div>
+  </template>
+
+  <!-- 子组件访问根组件 -->
+  <div id="app3">
+    <fieldset>
+      <legend>子组件访问根组件：$root</legend>
+      <cpn4></cpn4>
+      <button @click="btn4">修改 num4 的值</button>
+    </fieldset>
+  </div>
+  <template id="cpn4">
+    <div>
+      <fieldset>
+        <legend>我是子组件cpn4</legend>
+        <cpn5></cpn5>
+    </div>
+  </template>
+  <template id="cpn5">
+    <div>
+      <fieldset>
+        <legend>我是子组件cpn5</legend>
+        <h3>根组件的值：num4 -> {{$root.num4}}</h3>
+    </div>
+  </template>
+
+  <script src="https://cdn.staticfile.org/vue/3.2.26/vue.global.js"></script>
+  <script>
+    /** 1、父访问子组件 **/
+    const cpn1 = {
+      template: "#cpn1",
+      props:{
+        name:String
+      },
+      data(){
+        return {
+          num:1
+        }
+      }
+    }
+    const app1 = Vue.createApp({
+      methods:{
+        btn1(){
+          // 只有包含 ref 属性的组件，才会出现在 $refs 中
+          console.log("$refs",this.$refs)
+          // cpn1_2 为组件中 ref 属性的值
+          this.$refs.cpn1_2.num++
+        }
+      },
+      components:{
+        cpn1
+      }
+    }).mount("#app1")
+    
+    /** 2、子访问父组件 **/
+    const cpn2 = {
+      template: "#cpn2",
+      methods:{
+        btn3(){
+          // 可以调用属性
+          this.$parent.num2++
+          // 也可以调用方法
+          this.$parent.btn2()
+        }
+      }
+    }
+    const cpn3 = {
+      template: "#cpn3",
+      // 使用父组件的哪些值
+      inject:['parentNum3','respParentNum3','changeNum3Method']
+    }
+    const app2 = Vue.createApp({
+      data(){
+        return {
+          num2:2,
+          num3:3
+        }
+      },
+      // 开放哪些值
+      provide(){
+        return {
+          // 下面这个不是响应式，因为 provide 不支持响应式
+          parentNum3: this.num3,
+          // 通过 Vue.computed 变相支持响应式
+          respParentNum3: Vue.computed(() => this.num3),
+          // 属性、方法都可以传
+          changeNum3Method: this.changeNum3
+        }
+      },
+      methods:{
+        btn2(){
+          this.num2++
+        },
+        changeNum3(){
+          this.num3++
+        }
+      },
+      components:{
+        cpn2,
+        cpn3
+      }
+    }).mount("#app2")
+
+    /** 3、子组件访问根组件 **/
+    const cpn5 = {
+      template: "#cpn5"
+    }
+    const cpn4 = {
+      template: "#cpn4",
+      components:{
+        cpn5
+      }
+    }
+    const app3 = Vue.createApp({
+      data(){
+        return {
+          num4:4
+        }
+      },
+      methods:{
+        btn4(){
+          this.num4++
+        },
+      },
+      components:{
+        // 由于 cpn5 只有 cpn4 使用所以 cpn5 不在这里注册
+        cpn4,
+      }
+    }).mount("#app3")
+
+  </script>
+</body>
+</html>
