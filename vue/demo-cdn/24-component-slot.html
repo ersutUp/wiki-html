@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>组件的插槽</title>
+</head>
+<body>
+  <!-- 父访问子组件 -->
+  <div id="app1">
+    <fieldset>
+      <legend>1、基本使用</legend>
+      <cpn1>
+        这是纯文本插槽内容
+      </cpn1>
+      <cpn1>
+        <h3>插槽内容也可以是html</h3>
+      </cpn1>
+      <cpn1>
+        纯文本<span style="color: red;">和html也可以混用</span>
+      </cpn1>
+    </fieldset>
+    
+    <fieldset>
+      <legend>2、默认值</legend>
+      <cpn2>
+        不使用默认值
+      </cpn2>
+      <cpn2></cpn2>
+    </fieldset>
+
+    <fieldset>
+      <legend>3、具名插槽</legend>
+      <h4>通过设置 templeat 标签的 v-slot 属性来指定对应的插槽，格式：v-slot:插槽名</h4>
+      <cpn3>
+        <template v-slot:left>
+          <button>返回</button>
+        </template>
+        <template v-slot:center>
+          标题
+        </template>
+        <template v-slot:right>
+          <button>搜索</button>
+        </template>
+        <template v-slot:default>
+          明天上班啦
+        </template>
+      </cpn3>
+      <br>
+      <h4>当只使用默认插槽时可以省去template标签</h4>
+      <cpn3>只使用默认插槽</cpn3>
+    </fieldset>
+
+    <fieldset>
+      <legend>3.1、具名插槽的语法糖</legend>
+      <h4>v-slot 的语法糖 # ，那么对应格式：#插槽名 </h4>
+      <cpn3>
+        <template #left>
+          <button>返回</button>
+        </template>
+        <template #center>
+          标题
+        </template>
+        <template #right>
+          <button>搜索</button>
+        </template>
+        <template #default>
+          语法糖
+        </template>
+      </cpn3>
+    </fieldset>
+
+    <fieldset>
+      <legend>4、作用域插槽</legend>
+      <cpn4></cpn4>
+      <cpn4>
+        <!-- #default="slot" 中的 solt 是接受从插槽中传来的值 -->
+        <template #default="slot">
+          <span v-for="movie in slot.data">{{movie}} , </span>
+        </template>
+      </cpn4>
+      <br>
+
+      <h4>当只使用默认插槽时可以省去template标签,把 v-lost 直接放到组件的标签上</h4>
+      <cpn4 #default="slot1">
+        <span v-for="movie in slot1.data">{{movie}} - </span>
+      </cpn4>
+      <br>
+      
+      <h4>使用 ES2015 解构 可以再一般进行简化</h4>
+      <cpn4  #default="{data}">
+        <span v-for="movie in data">{{movie}} # </span>
+        <h4>同时可以完成重命名</h4>
+        <cpn4  #default="{data:movies}">
+          <span v-for="movie in movies">{{movie}} . </span>
+        </cpn4>
+        <h4>以及完成默认值，避免出现undefined</h4>
+        <!-- 插槽中未提供 data1  -->
+        <cpn4  #default="{data1:movies = ['误杀2','四海']}">
+          <span v-for="movie in movies">{{movie}} ~ </span>
+        </cpn4>
+      </cpn4>
+    </fieldset>
+
+  </div>
+  <!-- 1、基本使用 -->
+  <template id="cpn1">
+    <fieldset>
+      <legend>cpn1组件</legend>
+      <slot></slot>
+    </fieldset>
+  </template>
+
+  <!-- 2、默认值 -->
+  <template id="cpn2">
+    <fieldset>
+      <legend>cpn2组件</legend>
+      <slot>我是默认值</slot>
+    </fieldset>
+  </template>
+
+  <!-- 3、具名插槽 -->
+  <template id="cpn3">
+    <fieldset>
+      <legend>cpn3组件</legend>
+      <div>
+        <span>
+          <slot name="left">左边</slot>
+        </span>
+        <span>
+          <slot name="center">中间</slot>
+        </span>
+        <span>
+          <slot name="right">左边</slot>
+        </span>
+      </div>
+      <div>
+        <slot>内容</slot>
+      </div>
+    </fieldset>
+  </template>
+
+  <!-- 4、作用域插槽 -->
+  <template id="cpn4">
+    <fieldset>
+      <legend>cpn4组件</legend>
+      <!-- :data="movies" 是将 movies 开放给插槽并命名为 data-->
+      <slot :data="movies">
+        <ul>
+          <li v-for="item of movies">{{item}}</li>
+        </ul>
+      </slot>
+    </fieldset>
+  </template>
+
+  <script src="https://cdn.staticfile.org/vue/3.2.26/vue.global.js"></script>
+  <script>
+    /** 1、基本使用 **/
+    const cpn1 = {
+      template: "#cpn1"
+    }
+    /** 2、默认值 **/
+    const cpn2 = {
+      template: "#cpn2"
+    }
+    /** 3、具名插槽 **/
+    const cpn3 = {
+      template: "#cpn3"
+    }
+    /** 4、作用域插槽 **/
+    const cpn4 = {
+      template: "#cpn4",
+      data(){
+        return {
+          movies:["摔跤吧，爸爸","阿甘正传","星际穿越","让子弹飞"]
+        }
+      }
+    }
+
+
+
+    const app1 = Vue.createApp({
+      methods:{
+        
+      },
+      components:{
+        cpn1,
+        cpn2,
+        cpn3,
+        cpn4
+      }
+    }).mount("#app1")
+
+  </script>
+</body>
+</html>

@@ -39,18 +39,22 @@
     1. 手动实现
     2. 通过watch优化
     3. vue3中自带的语法糖
-
 28. [父子组件的访问](./demo-cdn/23-component4.html)
     1. 父访问子组件：
        1. $children（vue3中没有了）
        2. $refs
-
     2. 子访问父组件：
        1. $parent
           1. 完全访问父组件，因为 $parent 直接拿到了父组件对象
 
        2. Provide / Inject
           1. 相比 $parent， Provide / Inject对权限可控
-
     3. 子组件访问根组件：$root
+29. [组件的插槽（组件的扩展接口）](./demo-cdn/24-component-slot.html)
+    1. 基本使用
+    2. 默认值
+    3. 具名插槽
+       1. v-lost的语法糖 #
+
+    4. 作用域插槽（插槽中使用子组件的值）
 
