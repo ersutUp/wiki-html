@@ -2,11 +2,9 @@
 
 ### 没有模块化带来的问题
 
-[源代码](../demo/05-non-module.html)
-
 不同js文件内的变量名发生冲突时（**通过var定义变量允许冲突**），代码可能不会按预想的方式运行，从而**出现bug**，尤其是在代码量较大的情况下排查更麻烦，看下边的示例：
 
-html部分：
+[html部分](../demo/05-non-module.html)：
 
 ```html
 <body>
@@ -19,7 +17,7 @@ html部分：
 </body>
 ```
 
-non-module-1.js
+[non-module-1.js](../demo/js/non-module-1.js)
 
 ```js
 var flag = true
@@ -29,7 +27,7 @@ if(flag){
 flag = false
 ```
 
-non-module-2.js
+[non-module-2.js](../demo/js/non-module-2.js)
 
 ```js
 if(flag){
@@ -193,9 +191,7 @@ console.log(fileName,modExport.default())
 
 ### <div id="isolation">通过模块化解决一开始提出的问题</div>
 
-[源代码](../demo/05-module.html)
-
-html：
+[html](../demo/05-module.html)：
 
 ```html
 <body>
@@ -205,7 +201,7 @@ html：
 </body>
 ```
 
-module-1.js:
+[module-1.js](../demo/js/module-1.js):
 
 ```js
 let flag = true
@@ -215,7 +211,7 @@ if(flag){
 flag = false
 ```
 
-module-2.js:
+[module-2.js](../demo/js/module-2.js):
 
 ```js
 import { flag } from "./module-common.js"
@@ -225,7 +221,7 @@ if(flag){
 }
 ```
 
-module-common.js:
+[module-common.js](../demo/js/module-common.js):
 
 ```js
 let flag = true
