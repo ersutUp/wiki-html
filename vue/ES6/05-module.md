@@ -10,7 +10,7 @@ html部分：
 <body>
   <h1>看控制台</h1>
   <script>
-    let flag = true
+    var flag = true
   </script>
   <script src="./js/non-module-1.js"></script>
   <script src="./js/non-module-2.js"></script>
@@ -20,7 +20,7 @@ html部分：
 non-module-1.js
 
 ```js
-let flag = true
+var flag = true
 if(flag){
   console.log("我是non-module-1.js")
 }
