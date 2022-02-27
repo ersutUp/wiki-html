@@ -61,10 +61,4 @@
     1. [介绍](./webpack/31-webpack-install.md)
     2. [安装](./webpack/31-webpack-install.md#install)
     3. [基本使用与打包](./webpack/31-helloworld.md)
-    4. webpack的配置文件（webpack.config.js）
-       1. 在根目录新建webpack.config.js文件，webpack在不指定配置文件的情况下会默认将这个文件作为配置文件
-       2. 执行webpack
-    5. node的配置文件（package.json）
-       1. 执行npm init
-       2. 执行npm install
-       3. 由于不同项目中版本要求可能不一样，本地安装webpack，执行命令：`npm install webpack@3.6.0 --save-dev`，其中`--save-dev`的意思是只在开发中使用这个包
+    4. [webpack的配置文件（webpack.config.js）和node的配置文件（package.json）](./webpack/31-config.md)

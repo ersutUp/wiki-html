@@ -1,0 +1,1 @@
+(()=>{var o={263:o=>{o.exports={helloWorld:"hello world"}}},r={};function e(l){var t=r[l];if(void 0!==t)return t.exports;var s=r[l]={exports:{}};return o[l](s,s.exports,e),s.exports}(()=>{"use strict";let{helloWorld:o}=e(263);console.log(o),console.log("webpack "+o)})()})();
