@@ -93,6 +93,6 @@
    1. 本地安装webpack，执行命令：`npm install webpack@3.6.0 --save-dev`，其中`--save-dev`的意思是只在开发中使用这个包
       1. 这条命令执行后项目中多了node_modules文件夹，这个文件夹是项目中的依赖包
       2.  package.json 也发生了变化，多了一项配置 `"devDependencies": {"webpack": "^3.6.0"}`，这个配置是引入项目的依赖，并且这个依赖只在开发中使用，不参与最终发布的代码
-   2. 在node配置文件中命令映射，`"scripts": {"bulid": "webpack"}`添加这个配置后，在控制台执行`npm run build`最终会调用`webpack`，他不同的地方是会**优先使用本地的webpack也就的项目中依赖的webpack**，如果项目中没有依赖webpack会调用全局的webpack
+   2. 在node配置文件中命令映射，`"scripts": {"build": "webpack"}`添加这个配置后，在控制台执行`npm run build`最终会调用`webpack`，他不同的地方是会**优先使用本地的webpack也就的项目中依赖的webpack**，如果项目中没有依赖webpack会调用全局的webpack
 
-10. 执行`npm run bulid`打包项目
+10. 执行`npm run build`打包项目
