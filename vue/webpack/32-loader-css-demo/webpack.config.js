@@ -11,9 +11,6 @@ module.exports = {
     //打包文件的文件名
     filename:"main.bundle.js"
   },
-  resolve: {
-      extensions: ['.js', '.css', '.json']
-  },
   module:{
     rules:[
       {

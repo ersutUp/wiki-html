@@ -34,7 +34,7 @@
 
 ### css-loader
 
-作用：负责解析js中引入样式的语法
+作用：加载 CSS 文件
 
 使用：
 
@@ -78,8 +78,39 @@
   };
   ```
 
-  **注意：loader的顺序不能反，因为webpack打包时会按照从左往右的顺序加载loader，即先使用`style-loader`再使用`css-loader`**
+  **注意：loader的顺序不能反，因为webpack打包时会按照从右往左的顺序加载loader，即先使用`css-loader`再使用`style-loader`**
 
-[示例项目](./32-loader-style-demo)
+[示例项目](./32-loader-css-demo)
 
 ## 加载less文件
+
+需要的loader：less-loader
+
+### less-loader
+
+作用：将 Less 编译为 CSS 
+
+使用：
+
+- npm安装命令：`npm install --save-dev less less-loader`
+
+  - 需要安装`less`来支撑`less-loader`
+
+- webpack配置中添加loader：
+
+  ```js
+  module.exports = {
+    module: {
+      rules: [
+        {
+          test: /\.less$/i,
+          use: ["style-loader","css-loader","less-loader"],
+        },
+      ],
+    },
+  };
+  ```
+
+  - **use中使用了三个loader是因为`less-loader`只负责编译成css，而css文件的加载以及插入到DOM中生效还需要其他两个loader来处理**
+
+[示例项目](./32-loader-less-demo)
