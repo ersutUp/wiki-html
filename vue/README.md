@@ -100,6 +100,7 @@
     1. [官方文档](https://webpack.docschina.org/loaders/)
     2. [样式](./webpack/32-loader-style.md)
        1. 加载css文件
+       2. 加载less文件
     3. 图片
     4. 语法转换
 
