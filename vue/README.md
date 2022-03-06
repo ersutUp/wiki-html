@@ -101,7 +101,10 @@
     2. [样式](./webpack/32-loader-style.md)
        1. 加载css文件
        2. 加载less文件
-    3. 图片
+    3. [图片（webpack5+弃用loader使用资源模块）](./webpack/32-asset-module.md)
+       1. 编译时图片转换Base64
+       2. 编译时图片使用文件（不转换Base64）
+       3. 定义打包后图片的名称规则以及打包时进入指定目录
     4. 语法转换
 
 33. sdd
