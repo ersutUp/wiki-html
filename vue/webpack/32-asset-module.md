@@ -2,7 +2,6 @@
 
 > 在webpack5之前加载图片使用loader来处理，到了webpack5以后通过资源模块（asset module）进行处理，资源模块还可以处理其他文件比如字体、json文件
 >
-> [示例项目](./32-asset-module)
 
 ### 如何配置和使用 asset module
 
@@ -111,3 +110,7 @@ module.exports = {
 | [hash]     | 文件的 Hash 值                       |
 
 其中`[hash]`可以指定长度，像`[hash:16]`是指定长度为16位
+
+
+
+[**示例项目**](./32-asset-module)
