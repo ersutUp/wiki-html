@@ -27,11 +27,13 @@ module.exports = {
     ]
   },
   plugins:[
+    //这里不要丢了
     new VueLoaderPlugin(),
     new webpack.DefinePlugin({
-      //todo 这俩是啥？？？
-      __VUE_OPTIONS_API__: true,
-      __VUE_PROD_DEVTOOLS__: false,
+      //vue3中新增了组合式api,原本vue3之前使用的选项式api，下边这参数就是选项式api的开关
+      // __VUE_OPTIONS_API__: true,
+      //在生产环境中是否允许使用浏览器插件vue-devtools
+      // __VUE_PROD_DEVTOOLS__: false,
     }),
   ],
   resolve: {

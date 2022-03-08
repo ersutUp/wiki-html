@@ -1,6 +1,6 @@
 # Vue
 
-
+> 还需要学习：[Vite](https://cn.vitejs.dev/)（构建工具，尤雨溪出品）、组合式API
 
 1. [ES6中的let与var区别](./demo/01-let-var.html)
 
@@ -107,5 +107,5 @@
        3. 定义打包后图片的名称规则以及打包时进入指定目录
     4. [ES6语法转换ES5语法](./webpack/32-loader-babel.md)
 
-33. sdd
+33. [webpack中使用vue](./webpack/33-webpack-vue.md)
 
