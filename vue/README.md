@@ -109,3 +109,7 @@
 
 33. [webpack中使用vue](./webpack/33-webpack-vue.md)
 
+34. webpack的插件
+
+    1. [html-webpack-plugin](./webpack/34-plugin-html.md)：将index文件输出到打包目录
+
