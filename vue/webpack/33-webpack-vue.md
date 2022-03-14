@@ -32,12 +32,13 @@
    module.exports = {
      resolve: {
        alias: {
+         //指定vue版本
          vue: 'vue/dist/vue.esm-bundler.js',
        },
      },
    }
    ```
-
+   
    1. 这个配置是为了[支持运行时模板编译](https://staging-cn.vuejs.org/guide/scaling-up/tooling.html#project-scaffolding)
 
 ### .vue文件：通过组件的方式在webpack中使用vue

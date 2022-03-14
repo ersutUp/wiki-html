@@ -50,7 +50,7 @@
 
 24. [购物车demo](./demo-cdn/18-shopping-cart.html)
     1. vue3中移除了过滤器，推荐使用计算属性或方法代替
-    
+
 25. [v-model的使用、原理以及修饰符](./demo-cdn/19-v-model.html)
 
 26. [组件化](./demo-cdn/20-component.html)
@@ -58,16 +58,16 @@
     2. 局部组件
     3. 组件中使用其他组件
     4. 模板抽离
-    
+
 27. [组件的通信](./demo-cdn/21-component2.html)
     1. 传值
     2. 组件通知上级（自定义事件）
-    
+
 28. [组件的双向绑定](./demo-cdn/22-component3.html)
     1. 手动实现
     2. 通过watch优化
     3. vue3中自带的语法糖
-    
+
 29. [父子组件的访问](./demo-cdn/23-component4.html)
     1. 父访问子组件：
        1. $children（vue3中没有了）
@@ -79,20 +79,20 @@
        2. Provide / Inject
           1. 相比 $parent， Provide / Inject对权限可控
     3. 子组件访问根组件：$root
-    
+
 30. [组件的插槽（组件的扩展接口）](./demo-cdn/24-component-slot.html)
     1. 基本使用
     2. 默认值
     3. 具名插槽
        1. v-lost的语法糖 #
     4. 作用域插槽（插槽中使用子组件的值）
-    
+
 31. webpack模块打包工具
     1. [介绍](./webpack/31-webpack-install.md)
     2. [安装](./webpack/31-webpack-install.md#install)
     3. [基本使用与打包](./webpack/31-helloworld.md)
     4. [webpack的配置文件（webpack.config.js）和node的配置文件（package.json）](./webpack/31-config.md)
-    
+
 32. webpack的loader（装载器）
 
     > loader是打包项目时使用的，他可以解析源文件中的一些特殊语法，比如导入图片、样式，甚至可以转换语言（例如ES6转ES5）
@@ -112,4 +112,8 @@
 34. webpack的插件
 
     1. [html-webpack-plugin](./webpack/34-plugin-html.md)：将index文件输出到打包目录
+
+35. [webpack的本地服务器](./webpack/35-webpack-server.md)
+
+    1. 修改源码后自动编译
 
