@@ -54,15 +54,19 @@
 25. [v-model的使用、原理以及修饰符](./demo-cdn/19-v-model.html)
 
 26. [组件化](./demo-cdn/20-component.html)
+    
     1. 全局组件
     2. 局部组件
     3. 组件中使用其他组件
     4. 模板抽离
-
+    5. [组件中name的作用](https://staging-cn.vuejs.org/api/options-misc.html#name)
+       1. 注意：在单文件下指定组件名称与文件名不一致时在自己的模板中两个组件名都可以使用，例如文件名为App.vue，name指定为 App1 那么在自己的模板中可以使用 `<App/>`以及`<App1/>`
+    
 27. [组件的通信](./demo-cdn/21-component2.html)
+    
     1. 传值
     2. 组件通知上级（自定义事件）
-
+    
 28. [组件的双向绑定](./demo-cdn/22-component3.html)
     1. 手动实现
     2. 通过watch优化
@@ -118,3 +122,5 @@
     1. 修改源码后自动编译
 
 36. [webpack的配置文件分离](./webpack/36-config.md)
+
+37. [vue-CLI3安装和创建项目](./vue-CLI3安装和创建项目.md)
