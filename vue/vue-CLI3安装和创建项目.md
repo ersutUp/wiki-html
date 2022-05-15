@@ -65,6 +65,16 @@ node.js
    ```
 
    选择独立保存，修改时方便
+   
+5. 是否将当前设置保存为预设
+
+   ```
+   Save this as a preset for future projects? (y/N)
+   ```
+
+   Y：保存预设，保存后在创建项目时会看到保存的预设
+
+   N：不保存
 
 
 
