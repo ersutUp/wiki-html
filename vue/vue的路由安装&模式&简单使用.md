@@ -151,8 +151,36 @@ Hash模式，通过URL中的哈希字符实现，例如`127.0.0.1/index.html#/ho
 #### 路由的内置组件
 
 - router-link
+
   - 用于路由的跳转，类似a标签不同的是router-link不会刷新页面
+
+  - 属性
+
+    - to：路由跳转的链接
+
+    - replace：在历史记录中覆盖上一个链接，即不支持浏览器返回来源页
+
+    - active-class：
+
+      - 链接激活时（点击链接后），应用于渲染标签的class（默认值为router-link-active），可以通过该class设置样式，此设置优先于全局配置。
+
+      - 该可以在router中通过`linkActiveClass`进行全局配置
+
+        ```js
+        ...
+        //创建路由
+        let router = createRouter({
+          ...
+          //映射关系
+          routes,
+          //激活链接时，应用于渲染标签的class
+          linkActiveClass: "custom-active"
+        })
+        ...
+        ```
+
 - router-view
+
   - 将显示与 url 对应的组件
 
 #### 修改App.vue使路由对应的组件可以展示

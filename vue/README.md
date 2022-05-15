@@ -91,12 +91,13 @@
     3. 子组件访问根组件：$root
 
 30. [组件的插槽（组件的扩展接口）](./demo-cdn/24-component-slot.html)
+    
     1. 基本使用
     2. 默认值
     3. 具名插槽
        1. v-lost的语法糖 #
     4. 作用域插槽（插槽中使用子组件的值）
-
+    
 31. webpack模块打包工具
     1. [介绍](./webpack/31-webpack-install.md)
     2. [安装](./webpack/31-webpack-install.md#install)
@@ -132,3 +133,5 @@
 37. [vue-CLI3安装和创建项目](./vue-CLI3安装和创建项目.md)
 
 38. [vue的路由安装、模式、简单使用](./vue的路由安装&模式&简单使用.md)
+
+    1. router-link的属性 to、replace、active-class
