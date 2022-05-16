@@ -270,4 +270,4 @@ let routes = [
 
 
 
-[示例项目](./scaffolding/38-router)
+[示例项目](./scaffolding/38-router-install)
