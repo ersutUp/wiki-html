@@ -135,3 +135,7 @@
 38. [vue的路由安装、模式、简单使用](./vue的路由安装&模式&简单使用.md)
 
     1. router-link的属性 to、replace、active-class
+
+39. [vue路由的使用](./vue路由的使用.md)
+
+    1. 通过js代码跳转
