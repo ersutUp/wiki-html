@@ -1,6 +1,7 @@
 import { createRouter,createWebHistory,createWebHashHistory } from "vue-router";
 import home from "@/views/home"
 import methodJump from "@/views/method-jump"
+import dynamicRoute from "@/views/dynamic-route"
 
 //路由的映射关系
 let routes = [
@@ -15,6 +16,11 @@ let routes = [
   {
     path: "/method-jump",
     component: methodJump
+  },
+  {
+    //:id 代表动态路由中的id参数
+    path: "/dynamic-route/:id",
+    component: dynamicRoute
   },
 ]
 

@@ -1,7 +1,13 @@
 <template>
+  <div>
+    <label>动态路由的参数</label><input type="input" v-model="id"/>
+  </div>
   <router-link to="/home">首页</router-link>
   |
   <router-link to="/method-jump">通过方法跳转</router-link>
+  |
+  <router-link :to="'/dynamic-route/'+id">动态路由</router-link>|
+  <router-link :to="'/dynamic-route/'+id+'hh'">动态路由</router-link>
   <div>
     <fieldset>
       <legend>
@@ -12,6 +18,15 @@
   </div>
 </template>
 
+<script>
+export default {
+  data(){
+    return{
+      id: 123
+    }
+  }
+}
+</script>
 
 <style>
 #app {
