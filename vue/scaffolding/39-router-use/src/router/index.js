@@ -3,6 +3,9 @@ import home from "@/views/home"
 import methodJump from "@/views/method-jump"
 import dynamicRoute from "@/views/dynamic-route"
 
+const routerLazy = () => import("@/views/router-lazy")
+const routerLazy2 = () => import("@/views/router-lazy2")
+
 //路由的映射关系
 let routes = [
   {
@@ -21,6 +24,16 @@ let routes = [
     //:id 代表动态路由中的id参数
     path: "/dynamic-route/:id",
     component: dynamicRoute
+  },
+  {
+    path: "/lazy-router",
+    //路由的懒加载
+    component: routerLazy
+  },
+  {
+    path: "/lazy-router2",
+    //路由的懒加载
+    component: routerLazy2
   },
 ]
 

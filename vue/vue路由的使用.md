@@ -98,3 +98,49 @@ export default {
 ```
 
 [示例代码](./scaffolding/39-router-use/src/App.vue)
+
+### 路由的懒加载
+
+#### 懒加载的作用
+
+vue打包时会将所有组件放在一个js中，随着业务的增长组件越来越多，这个js文件会越来越大，这样会导致浏览器在加载这个js时时间变长，页面出现短暂的空白，体验极差，这时后就需要懒加载将组件剥离开分成多个js文件，来解决这个问题。
+
+路由的懒加载最终可以将一个组件或或者多个组件加载到一个独立的js文件中，在使用到对应组件是才加载js。
+
+#### 懒加载写法
+
+```js
+
+const routerLazy = () => import("@/views/router-lazy")
+
+//路由的映射关系
+let routes = [
+  {
+    path: "/lazy-router",
+    //路由的懒加载
+    component: routerLazy
+  },
+]
+
+//创建路由
+let router = createRouter({
+  //映射关系
+  routes,
+})
+```
+
+#### 懒加载请求分析
+
+##### 打包文件分析
+
+![](./images/router-lazy.png)
+
+可以看到多出来两套文件 这是使用了两个懒加载的路由
+
+##### 请求分析
+
+<img src="./images/router-lazy-request.png" style="zoom:67%;" />
+
+在请求首页时只加载了必要文件，当请求懒加载路由时请求了对应的js
+
+[示例代码](./scaffolding/39-router-use/src/router/index.js)
