@@ -36,7 +36,7 @@ methods:{
 
 [示例代码](./scaffolding/39-router-use/src/views/method-jump.vue)
 
-### 动态路由的使用
+### <div id="dynamic"></div>动态路由的使用
 
 #### 参数定义
 
@@ -99,7 +99,7 @@ export default {
 
 [示例代码](./scaffolding/39-router-use/src/App.vue)
 
-### 路由的懒加载
+### <div id="lazy"></div>路由的懒加载
 
 #### 懒加载的作用
 
@@ -142,5 +142,59 @@ let router = createRouter({
 <img src="./images/router-lazy-request.png" style="zoom:67%;" />
 
 在请求首页时只加载了必要文件，当请求懒加载路由时请求了对应的js
+
+[示例代码](./scaffolding/39-router-use/src/router/index.js)
+
+
+
+### <div id="nesting"></div>嵌套路由
+
+#### 适用场景
+
+- 手机端的底部导航，点击不同导航显示不同的页面
+
+#### 语法
+
+router/index.js
+
+```js
+const nesting = () => import("@/views/nesting-router")
+const nestingNews = () => import("@/views/nesting-router-news")
+const nestingMessage = () => import("@/views/nesting-router-message")
+
+//路由的映射关系
+let routes = [
+  {
+    path:"/nesting-router",
+    component: nesting,
+    //嵌套路由
+    children:[
+      {
+        //默认展示 nestingNews 组件
+        path:"",
+        redirect:"/nesting-router/news"
+      },
+      {
+        path:"news",
+        component: nestingNews
+      },
+      {
+        path:"msg",
+        component: nestingMessage
+      },
+    ]
+  }
+]
+
+//创建路由
+let router = createRouter({
+  //映射关系
+  routes,
+})
+```
+
+#### 截图示例
+
+![](./images/router-nesting.png)
 
 [示例代码](./scaffolding/39-router-use/src/router/index.js)

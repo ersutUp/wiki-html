@@ -10,6 +10,9 @@
   <router-link :to="'/dynamic-route/'+id+'hh'">动态路由</router-link>|
   <router-link to="/lazy-router">路由的懒加载</router-link>|
   <router-link to="/lazy-router2">路由的懒加载2</router-link>
+
+  |
+  <router-link to="/nesting-router">嵌套路由</router-link>
   <div>
     <fieldset>
       <legend>

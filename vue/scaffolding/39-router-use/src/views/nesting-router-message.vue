@@ -1,0 +1,14 @@
+<template>
+  <ul>
+    <li>消息</li>
+    <li>消息</li>
+    <li>消息</li>
+    <li>消息</li>
+    <li>消息</li>
+    <li>消息</li>
+    <li>消息</li>
+    <li>消息</li>
+    <li>消息</li>
+    <li>消息</li>
+  </ul>
+</template>

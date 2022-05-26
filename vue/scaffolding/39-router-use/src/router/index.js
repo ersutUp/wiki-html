@@ -6,6 +6,10 @@ import dynamicRoute from "@/views/dynamic-route"
 const routerLazy = () => import("@/views/router-lazy")
 const routerLazy2 = () => import("@/views/router-lazy2")
 
+const nesting = () => import("@/views/nesting-router")
+const nestingNews = () => import("@/views/nesting-router-news")
+const nestingMessage = () => import("@/views/nesting-router-message")
+
 //路由的映射关系
 let routes = [
   {
@@ -35,6 +39,26 @@ let routes = [
     //路由的懒加载
     component: routerLazy2
   },
+  {
+    path:"/nesting-router",
+    component: nesting,
+    //嵌套路由
+    children:[
+      {
+        //默认展示 nestingNews 组件
+        path:"",
+        redirect:"/nesting-router/news"
+      },
+      {
+        path:"news",
+        component: nestingNews
+      },
+      {
+        path:"msg",
+        component: nestingMessage
+      },
+    ]
+  }
 ]
 
 //创建路由
