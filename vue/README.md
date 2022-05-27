@@ -142,3 +142,4 @@
     1. [动态路由的使用](./vue路由的使用.md#dynamic)
     1. [路由放入懒加载](./vue路由的使用.md#lazy)
     1. [嵌套路由](./vue路由的使用.md#nesting)
+    1. [参数传递](./vue路由的使用.md#query)

@@ -198,3 +198,101 @@ let router = createRouter({
 ![](./images/router-nesting.png)
 
 [示例代码](./scaffolding/39-router-use/src/router/index.js)
+
+### <div id="query"></div>参数传递
+
+#### 跳转时携带参数
+
+参数通过url中的query进行传递，也就是url中?后的key=value，例如：http://127.0.0.1:8080/adb/123?a=1&b=2，其中 ?a=1&b=2 就是query。
+
+##### router-link标签内传参
+
+```html
+<router-link :to="{path:'/query',query:{name:'ersut',age:18}}">参数传递</router-link>
+```
+
+其中 `{name:'ersut',age:18}`就是传递的两个参数，注意由于这里是对象所以需要v-bind即`:to`
+
+##### 在js内跳转时传递参数
+
+```js
+this.$router.push({
+    path:"/query",
+    query:{
+        name:"ersut wang",
+        age:19
+    }
+})
+```
+
+与标签内一样都是使用对象
+
+#### 组件内接收参数
+
+通过官方提供的$route获取参数
+
+```js
+this.$route.query.name
+this.$route.query.age
+```
+
+#### 使用props对组件传参解耦
+
+在组件内直接获取参数导致组件与路由高度耦合，可以配合上props进行解耦
+
+##### 在路由中开启props传参
+
+```js
+const query = () => import("@/views/query")
+
+//路由的映射关系
+let routes = [
+  {
+    path: "/query",
+    component: query,
+    //使用props对组件传参解耦
+    props: route => route.query
+  },
+]
+
+//创建路由
+let router = createRouter({
+  // 路由模式：HTML5模式
+  history: createWebHistory(),
+  //映射关系
+  routes,
+})
+```
+
+##### 组件中接收props
+
+```vue
+<template>
+<h3>使用prop传递参数</h3>
+<h4>姓名：{{name}}</h4>
+<h4>年龄：{{age}}</h4>
+</template>
+
+<script>
+export default {
+  props:{
+    name:{
+      type: [String],
+      default: ""
+    },
+    age:{
+      //当组件的props通过路由传递时务必要加上String类型，因为从地址栏中获取的参数都是String类型
+      type: [String,Number],
+      default: 0,
+      validator(value){
+        return value > -1;
+      }
+    }
+  }
+}
+</script>
+```
+
+这样在组件中就不再使用路由了完成解耦
+
+[示例代码](./scaffolding/39-router-use/src/views/query.vue)

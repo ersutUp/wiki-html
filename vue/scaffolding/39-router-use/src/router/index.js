@@ -10,6 +10,8 @@ const nesting = () => import("@/views/nesting-router")
 const nestingNews = () => import("@/views/nesting-router-news")
 const nestingMessage = () => import("@/views/nesting-router-message")
 
+const query = () => import("@/views/query")
+
 //路由的映射关系
 let routes = [
   {
@@ -58,7 +60,13 @@ let routes = [
         component: nestingMessage
       },
     ]
-  }
+  },
+  {
+    path: "/query",
+    //路由的懒加载
+    component: query,
+    props: route => route.query
+  },
 ]
 
 //创建路由
