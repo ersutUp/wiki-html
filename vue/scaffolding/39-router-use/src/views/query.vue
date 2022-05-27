@@ -1,5 +1,6 @@
 <template>
 <h3>使用prop传递参数</h3>
+<h4>ID：{{id}}</h4>
 <h4>姓名：{{name}}</h4>
 <h4>年龄：{{age}}</h4>
 </template>
@@ -7,6 +8,10 @@
 <script>
 export default {
   props:{
+    id:{
+      type: [String,Number],
+      default: 0
+    },
     name:{
       type: [String],
       default: ""

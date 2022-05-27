@@ -248,10 +248,10 @@ const query = () => import("@/views/query")
 //路由的映射关系
 let routes = [
   {
-    path: "/query",
+    path: "/query/:id",
     component: query,
     //使用props对组件传参解耦
-    props: route => route.query
+    props: route => Object.assign(route.query,route.params)
   },
 ]
 
@@ -269,6 +269,7 @@ let router = createRouter({
 ```vue
 <template>
 <h3>使用prop传递参数</h3>
+<h4>ID：{{id}}</h4>
 <h4>姓名：{{name}}</h4>
 <h4>年龄：{{age}}</h4>
 </template>
@@ -276,6 +277,10 @@ let router = createRouter({
 <script>
 export default {
   props:{
+    id:{
+      type: [String,Number],
+      default: 0
+    },
     name:{
       type: [String],
       default: ""

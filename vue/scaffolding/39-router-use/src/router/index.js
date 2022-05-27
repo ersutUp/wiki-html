@@ -62,10 +62,10 @@ let routes = [
     ]
   },
   {
-    path: "/query",
-    //路由的懒加载
+    path: "/query/:id",
     component: query,
-    props: route => route.query
+    //使用props对组件传参解耦  route.query：query参数；route.params：路径参数
+    props: route => Object.assign(route.query,route.params)
   },
 ]
 

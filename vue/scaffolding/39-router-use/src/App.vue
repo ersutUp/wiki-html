@@ -13,7 +13,7 @@
 
   |<router-link to="/nesting-router">嵌套路由</router-link>
 
-  |<router-link :to="{path:'/query',query:{name:'ersut',age:18}}">参数传递</router-link>
+  |<router-link :to="{path:'/query/1',query:{name:'ersut',age:18}}">参数传递</router-link>
 
   |<a href="javascript:void(0);" @click="jumpQuery">方法跳转时参数传递</a>
   <div>
@@ -36,7 +36,7 @@ export default {
   methods:{
     jumpQuery(){
       this.$router.push({
-        path:"/query",
+        path:"/query/2",
         query:{
           name:"ersut wang",
           age:19
