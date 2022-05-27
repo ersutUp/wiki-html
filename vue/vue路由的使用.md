@@ -250,7 +250,7 @@ let routes = [
   {
     path: "/query/:id",
     component: query,
-    //使用props对组件传参解耦
+    //使用props对组件传参解耦 route.query：query参数；route.params：路径参数
     props: route => Object.assign(route.query,route.params)
   },
 ]
