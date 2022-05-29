@@ -99,6 +99,52 @@ export default {
 
 [示例代码](./scaffolding/39-router-use/src/App.vue)
 
+#### <div id="404"></div>路由中404页面的处理
+
+通过动态路由在参数中自定义正则的方式可以匹配所有路由，示例：
+
+router/index.js
+
+```js
+const status404 = () => import("@/views/error/404");
+//路由的映射关系
+let routes = [
+  {
+    path: "/:notFound(.*)",
+    component: status404,
+    props: route => Object.assign(route.query,route.params),
+  }
+]
+
+//创建路由
+let router = createRouter({
+  // 路由模式：HTML5模式
+  history: createWebHistory(),
+  //映射关系
+  routes,
+})
+```
+
+404.vue
+
+```vue
+<template>
+  <h1>地址不存在：/{{notFound}}</h1>
+</template>
+
+<script>
+export default{
+  props:{
+    notFound: {
+      type: String
+    }
+  }
+}
+</script>
+```
+
+注意：**参数中自定义正则的动态路由不会影响其他路由正常匹配**，动态路由会滞后匹配，非动态路由会优先匹配
+
 ### <div id="lazy"></div>路由的懒加载
 
 #### 懒加载的作用

@@ -3,6 +3,8 @@ import home from "@/views/home"
 import methodJump from "@/views/method-jump"
 import dynamicRoute from "@/views/dynamic-route"
 
+const status404 = () => import("@/views/error/404");
+
 const routerLazy = () => import("@/views/router-lazy")
 const routerLazy2 = () => import("@/views/router-lazy2")
 
@@ -14,6 +16,11 @@ const query = () => import("@/views/query")
 
 //路由的映射关系
 let routes = [
+  {
+    path: "/:notFound(.*)",
+    props: route => Object.assign(route.query,route.params),
+    component: status404,
+  },
   {
     path:"/",
     redirect: "/home"
