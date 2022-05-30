@@ -145,6 +145,8 @@ export default{
 
 注意：**参数中自定义正则的动态路由不会影响其他路由正常匹配**，动态路由会滞后匹配，非动态路由会优先匹配
 
+[示例代码](./scaffolding/39-router-use/src/router/index.js)
+
 ### <div id="lazy"></div>路由的懒加载
 
 #### 懒加载的作用
@@ -347,3 +349,138 @@ export default {
 这样在组件中就不再使用路由了完成解耦
 
 [示例代码](./scaffolding/39-router-use/src/views/query.vue)
+
+### <div id="navigation-guards"></div>导航守卫
+
+#### 什么是导航守卫
+
+在路由跳转中的某些节点（前置守卫、后置守卫、等）插入代码，其实就是hook
+
+注意：导航守卫与组件的生命周期类似，但是俩个东西毫不相干。导航守卫只是在**路由的跳转中生效**，而组件的生命周期是在**路由成功跳转后生效**
+
+#### <div id="navigation-guards-order"></div>各种导航守卫的顺序
+
+1. 导航被触发。
+2. 在失活的组件里调用 `beforeRouteLeave` 守卫。
+3. 调用全局的 `beforeEach` 守卫。
+4. 在重用的组件里调用 `beforeRouteUpdate` 守卫(2.2+)。
+5. 在路由配置里调用 `beforeEnter`。
+6. 解析异步路由组件。
+7. 在被激活的组件里调用 `beforeRouteEnter`。
+8. 调用全局的 `beforeResolve` 守卫(2.5+)。
+9. 导航被确认。
+10. 调用全局的 `afterEach` 钩子。
+11. 触发 DOM 更新。
+12. 调用 `beforeRouteEnter` 守卫中传给 `next` 的回调函数，创建好的组件实例会作为回调函数的参数传入。
+
+
+
+注册全局前置守卫（钩子）：`beforeEach` 
+
+注册全局解析钩子： `beforeResolve` 
+
+注册全局后置守卫（钩子）： `afterEach` 
+
+[官方文档](https://router.vuejs.org/zh/guide/advanced/navigation-guards.html#%E5%AE%8C%E6%95%B4%E7%9A%84%E5%AF%BC%E8%88%AA%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B)
+
+#### 导航守卫的使用
+
+##### 守卫中的参数以及返回值
+
+参数：
+
+- to：当前导航即将进入的路由
+- from：当前导航要离开路由
+
+返回值：
+
+- 布尔值：
+  - false：终止导航
+  - true：继续导航
+- 对象（路由地址）：返回对象代表着重定向
+  - 重定向到另一个地址：{path:"/admin/login"}
+  - 带参数的重定向：{path:"/admin/login",query:{flag:1}}
+  - [更多](https://router.vuejs.org/zh/api/#routelocationraw)
+- 无返回值：与布尔值中的`true`一致
+
+示例：
+
+```js
+router.beforeEach((to,from) => {
+  //打印即将进入的路由path
+  console.log(to.path);
+  //打印将要离开的路由path
+  console.log(from.path);
+  //重定向
+  return {path:"/admin/login"};
+  //终止导航
+  return false;
+  //继续导航
+  return true;
+})
+```
+
+#### 导航守卫的示例
+
+##### 利用前置导航守卫实现登录拦截
+
+router/index.js
+
+```js
+//登录验证(前置守卫)
+router.beforeEach((to,from) => {
+
+  //登录验证
+  const toPath = to.path;
+  if(toPath.match(/^\/admin\/.*/g)){
+    //登录页放过
+    if(toPath === "/admin/login"){
+      return true;
+    }
+    //判断是否登录
+    const isLogin = localStorage.getItem(loginKey);
+    if(isLogin == false || isLogin == null){
+      return {path:"/admin/login"};
+    }
+  }
+
+  return true;
+})
+```
+
+##### 利用后置导航守卫实现页面title的切换
+
+```js
+//处理title(后置守卫)
+router.afterEach((to,from) => {
+  const title = to.matched[0].meta.title;
+  document.title = title;
+})
+```
+
+这里用前置守卫的话在前置守卫中发生重定向会**导致title获取的是重定向之前的路由**，解决这个问题使用后置守卫就可以，因为后置守卫是在**导航被确认**之后执行。
+
+##### url中的path规范化
+
+```js
+//url中path的处理
+router.beforeEach((to,from) => {
+  const toPath = to.path;
+  let handlePath = "";
+  //path规范化处理
+  for (let name of toPath.split("/")) {
+    if(name != ""){
+      handlePath+= "/"+name;
+    }
+  }
+  //如果path不一致进行重定向
+  if(toPath != handlePath){
+    return {path:handlePath}
+  }
+})
+```
+
+
+
+
+

@@ -16,6 +16,10 @@
   |<router-link :to="{path:'/query/1',query:{name:'ersut',age:18}}">参数传递</router-link>
 
   |<a href="javascript:void(0);" @click="jumpQuery">方法跳转时参数传递</a>
+
+<!-- 导航守卫 -->
+  |<router-link to="/admin/login">控制台登录页</router-link>
+  |<router-link to="/admin/console">控制台首页</router-link>
   <div>
     <fieldset>
       <legend>

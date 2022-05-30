@@ -1,4 +1,5 @@
 import { createRouter,createWebHistory,createWebHashHistory } from "vue-router";
+import { loginKey } from "@/constant/storage";
 import home from "@/views/home"
 import methodJump from "@/views/method-jump"
 import dynamicRoute from "@/views/dynamic-route"
@@ -14,12 +15,18 @@ const nestingMessage = () => import("@/views/nesting-router-message")
 
 const query = () => import("@/views/query")
 
+const adminLogin = () => import("@/views/admin/login")
+const adminConsole = () => import("@/views/admin/console")
+
 //路由的映射关系
 let routes = [
   {
     path: "/:notFound(.*)",
     props: route => Object.assign(route.query,route.params),
     component: status404,
+    meta:{
+      title:"404页面"
+    }
   },
   {
     path:"/",
@@ -27,30 +34,48 @@ let routes = [
   },
   {
     path: "/home",
-    component: home
+    component: home,
+    meta:{
+      title:"首页"
+    }
   },
   {
     path: "/method-jump",
-    component: methodJump
+    component: methodJump,
+    meta:{
+      title:"方法跳转"
+    }
   },
   {
     //:id 代表动态路由中的id参数
     path: "/dynamic-route/:id",
-    component: dynamicRoute
+    component: dynamicRoute,
+    meta:{
+      title:"动态路由"
+    }
   },
   {
     path: "/lazy-router",
     //路由的懒加载
-    component: routerLazy
+    component: routerLazy,
+    meta:{
+      title:"路由的懒加载"
+    }
   },
   {
     path: "/lazy-router2",
     //路由的懒加载
-    component: routerLazy2
+    component: routerLazy2,
+    meta:{
+      title:"路由的懒加载2"
+    }
   },
   {
     path:"/nesting-router",
     component: nesting,
+    meta:{
+      title:"嵌套路由"
+    },
     //嵌套路由
     children:[
       {
@@ -72,12 +97,33 @@ let routes = [
     path: "/query/:id",
     component: query,
     //使用props对组件传参解耦  route.query：query参数；route.params：路径参数
-    props: route => Object.assign(route.query,route.params)
+    props: route => Object.assign(route.query,route.params),
+    meta:{
+      title:"路由传参"
+    }
+  },
+  {
+    path: "/admin/login",
+    component: adminLogin,
+    //使用props对组件传参解耦  route.query：query参数；route.params：路径参数
+    props: route => Object.assign(route.query,route.params),
+    meta:{
+      title:"控制台登录页"
+    }
+  },
+  {
+    path: "/admin/console",
+    component: adminConsole,
+    //使用props对组件传参解耦  route.query：query参数；route.params：路径参数
+    props: route => Object.assign(route.query,route.params),
+    meta:{
+      title:"控制台首页"
+    }
   },
 ]
 
 //创建路由
-let router = createRouter({
+const router = createRouter({
   // 路由模式：HTML5模式
   history: createWebHistory(),
   //路由模式：hash模式
@@ -87,6 +133,47 @@ let router = createRouter({
   //激活链接时，应用于渲染标签的class
   linkActiveClass: "custom-active"
 })
+
+//导航守卫
+//url中path的处理
+router.beforeEach((to,from) => {
+  const toPath = to.path;
+  let handlePath = "";
+  //path规范化处理
+  for (let name of toPath.split("/")) {
+    if(name != ""){
+      handlePath+= "/"+name;
+    }
+  }
+  //如果path不一致进行重定向
+  if(toPath != handlePath){
+    return {path:handlePath}
+  }
+})
+
+//登录验证(前置守卫)
+router.beforeEach((to,from) => {
+  //登录验证
+  const toPath = to.path;
+  if(toPath.match(/^\/admin\/.*/g)){
+    //登录页放过
+    if(toPath === "/admin/login"){
+      return true;
+    }
+    //判断是否登录
+    const isLogin = localStorage.getItem(loginKey);
+    if(isLogin == false || isLogin == null){
+      return {path:"/admin/login"};
+    }
+  }
+})
+
+//处理title(后置守卫)
+router.afterEach((to,from) => {
+  const title = to.matched[0].meta.title;
+  document.title = title;
+})
+
 
 //导出路由
 export default router

@@ -145,3 +145,9 @@
     1. [嵌套路由](./vue路由的使用.md#nesting)
     1. [参数传递](./vue路由的使用.md#query)
        1. 使用props对组件传参解耦
+    1. [导航守卫](./vue路由的使用.md#navigation-guards)
+       1. [各个导航守卫的顺序](./vue路由的使用.md#navigation-guards-order)
+       1. 实例
+          1. 不同路由展示不同的title
+          1. 登录拦截
+
