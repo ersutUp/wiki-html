@@ -150,4 +150,10 @@
        1. 实例
           1. 不同路由展示不同的title
           1. 登录拦截
+    1. [keep-alive](./vue路由的使用.md#keep-alive)
+       1. 什么是keep-alive
+       1. kepp-alive的生命周期
+       1. 路由中使用keep-alive
+       1. keep-alive排除/包含组件
+       1. keep-alive的最大缓存数
 

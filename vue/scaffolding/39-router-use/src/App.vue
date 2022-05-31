@@ -20,6 +20,15 @@
 <!-- 导航守卫 -->
   |<router-link to="/admin/login">控制台登录页</router-link>
   |<router-link to="/admin/console">控制台首页</router-link>
+
+<!-- 路由中使用keepAlive -->
+  |<router-link to="/keepAlive/notUsed">不使用keepAlive</router-link>
+  |<router-link to="/keepAlive/use">使用keepAlive</router-link>
+  |<router-link to="/keepAlive/include">keepAlive指定组件</router-link>
+  |<router-link to="/keepAlive/exclude">keepAlive排除组件</router-link>
+  |<router-link to="/keepAlive/maxCache">keepAlive最大缓存数</router-link>
+  
+  
   <div>
     <fieldset>
       <legend>

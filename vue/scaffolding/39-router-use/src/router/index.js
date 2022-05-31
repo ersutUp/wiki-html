@@ -18,6 +18,31 @@ const query = () => import("@/views/query")
 const adminLogin = () => import("@/views/admin/login")
 const adminConsole = () => import("@/views/admin/console")
 
+//router使用keep-alive
+const useKeepAlive = () => import("@/views/kepp-alive/use-keep-alive");
+const useKeepAliveInclude = () => import("@/views/kepp-alive/use-keep-alive-include");
+const useKeepAliveExclude = () => import("@/views/kepp-alive/use-keep-alive-exclude");
+const useKeepAliveMaxCache = () => import("@/views/kepp-alive/use-keep-alive-max-cache");
+const notUsedKeepAlive = () => import("@/views/kepp-alive/not-used-keep-alive");
+
+const counter = () => import("@/views/kepp-alive/counter");
+const formPage = () => import("@/views/kepp-alive/form");
+const form2Page = () => import("@/views/kepp-alive/form2");
+const keepAliveChildren = [
+  {
+    path: "counter",
+    component: counter
+  },
+  {
+    path: "form",
+    component: formPage
+  },
+  {
+    path: "form2",
+    component: form2Page
+  },
+]
+
 //路由的映射关系
 let routes = [
   {
@@ -119,6 +144,58 @@ let routes = [
     meta:{
       title:"控制台首页"
     }
+  },
+
+  //keepAlive的使用
+  {
+    path: "/keepAlive/use",
+    component: useKeepAlive,
+    //使用props对组件传参解耦  route.query：query参数；route.params：路径参数
+    props: route => Object.assign(route.query,route.params),
+    meta:{
+      title:"使用keepAlive"
+    },
+    children: keepAliveChildren
+  },
+  {
+    path: "/keepAlive/notUsed",
+    component: notUsedKeepAlive,
+    //使用props对组件传参解耦  route.query：query参数；route.params：路径参数
+    props: route => Object.assign(route.query,route.params),
+    meta:{
+      title:"不使用keepAlive"
+    },
+    children: keepAliveChildren
+  },
+  {
+    path: "/keepAlive/include",
+    component: useKeepAliveInclude,
+    //使用props对组件传参解耦  route.query：query参数；route.params：路径参数
+    props: route => Object.assign(route.query,route.params),
+    meta:{
+      title:"keepAlive指定组件"
+    },
+    children: keepAliveChildren
+  },
+  {
+    path: "/keepAlive/exclude",
+    component: useKeepAliveExclude,
+    //使用props对组件传参解耦  route.query：query参数；route.params：路径参数
+    props: route => Object.assign(route.query,route.params),
+    meta:{
+      title:"keepAlive排除组件"
+    },
+    children: keepAliveChildren
+  },
+  {
+    path: "/keepAlive/maxCache",
+    component: useKeepAliveMaxCache,
+    //使用props对组件传参解耦  route.query：query参数；route.params：路径参数
+    props: route => Object.assign(route.query,route.params),
+    meta:{
+      title:"keepAlive最大缓存数"
+    },
+    children: keepAliveChildren
   },
 ]
 

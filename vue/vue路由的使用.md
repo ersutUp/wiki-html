@@ -480,7 +480,108 @@ router.beforeEach((to,from) => {
 })
 ```
 
+### <div id="keep-alive"></div>keep-alive的使用
 
+> [官方文档](https://staging-cn.vuejs.org/guide/built-ins/keep-alive.html)
+>
+> [路由中的使用](https://router.vuejs.org/zh/api/#router-view-%E7%9A%84-v-slot)
 
+#### 什么是keep-alive
 
+**用来缓存组件实例**，组件在切换后会将实例缓存起来，不会被卸载（不会调用生命周期的unmounted），在重新使用这个组件时将缓存中的实例进行展示。
+
+举个例子：组件内有表单假如不进行缓存，重新使用这组件时原来填写的数据会被清空，缓存后不会被清空。
+
+#### kepp-alive的生命周期
+
+由于缓存的组件实例在被切换后会变成**不活跃**的而不是被卸载（unmounted），在切换回来时会被重新**激活**而不是重新挂在（mounted），所以在生命周期中提供了`activated`和 `deactivated`俩个钩子，用来监听组件的**激活状态**和**不活跃状态**
+
+代码示例：
+
+```js
+export default {
+  activated() {
+    // 在首次挂载、
+    // 以及每次从缓存中被重新插入的时候调用
+  },
+  deactivated() {
+    // 在从 DOM 上移除、进入缓存
+    // 以及组件卸载时调用
+  }
+}
+```
+
+#### 路由中使用keep-alive
+
+`router-view`提供了插槽供用户使用
+
+插槽参数：
+
+- Component：组件本身
+- route：解析出的标准化路由对象
+
+路由中使用`keep-alive`代码示例：
+
+```html
+<router-view v-slot="{Component}">
+  <keep-alive>
+    <component :is="Component"></component>
+  </keep-alive>
+</router-view>
+```
+
+[示例项目](./scaffolding/39-router-use/src/views/kepp-alive/use-keep-alive.vue) 访问链接：/keepAlive/use 
+
+##### keep-alive排除/包含组件
+
+默认情况下，会缓存`keep-alive`内的所有组件，但是可以通过`include`和`exclude`属性来指定和排除组件。
+
+exclude示例：
+
+```html
+<router-view v-slot="{Component}">
+  <keep-alive :exclude="['counter']">
+    <component :is="Component"></component>
+  </keep-alive>
+</router-view>
+```
+
+[示例项目](./scaffolding/39-router-use/src/views/kepp-alive/use-keep-alive-exclude.vue) 访问链接：/keepAlive/exclude
+
+include示例：
+
+```html
+<router-view v-slot="{Component}">
+  <keep-alive :include="['counter']">
+    <component :is="Component"></component>
+  </keep-alive>
+</router-view>
+```
+
+[示例项目](./scaffolding/39-router-use/src/views/kepp-alive/use-keep-alive-include.vue) 访问链接：/keepAlive/include
+
+另外`include`和`exclude`的值可以通过正则表达式进行匹配
+
+```html
+<!-- 正则表达式 (需使用 `v-bind`) -->
+<KeepAlive :include="/a|b/">
+  <component :is="view" />
+</KeepAlive>
+```
+
+##### keep-alive的最大缓存数
+
+`keep-alive`允许通过`max`属性指定最大缓存组件的数量，当缓存数量到达最大缓存数量的时候，最久没有访问的组件会被销毁。
+
+代码示例：
+
+```html
+<router-view v-slot="{Component}">
+  <keep-alive max="2">
+    <component :is="Component"></component>
+  </keep-alive>
+</router-view>
+```
+
+[示例项目](./scaffolding/39-router-use/src/views/kepp-alive/use-keep-alive-max-cache.vue) 访问链接：/keepAlive/maxCache
 
