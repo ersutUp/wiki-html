@@ -70,6 +70,6 @@ const router = createRouter({
 })
 
 export default router
-
 ```
 
+[示例](./scaffolding/40-tabber/vue.config.js)
