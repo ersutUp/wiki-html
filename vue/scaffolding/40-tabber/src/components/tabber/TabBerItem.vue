@@ -2,12 +2,12 @@
   <div class="tab-ber-item" @click="$router.replace(path)">
     <div v-if="isActive" class="icon">
       <slot name="icon_activate">
-        <img src="@/assets/img/home-bar/home_activate.svg"/>
+        <img src="@assets/img/home-bar/home_activate.svg"/>
       </slot>
     </div>
     <div v-else class="icon"> 
       <slot name="icon">
-        <img src="@/assets/img/home-bar/home.svg"/>
+        <img src="@assets/img/home-bar/home.svg"/>
       </slot>
     </div>
     <div class="text">

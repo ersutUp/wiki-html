@@ -159,3 +159,8 @@
 
 40. [导航栏demo](./scaffolding/40-tabber/README.md)
 
+41. [配置路径别名](./vue-resolve-alias.md)
+
+    1. [vuecli3配置](./vue-resolve-alias.md#vueCli3)
+
+

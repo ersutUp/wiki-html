@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import MainTabBer from "@/components/MainTabBer";
+import MainTabBer from "@components/MainTabBer";
 
 export default {
   components:{
@@ -15,6 +15,6 @@ export default {
 </script>
 
 <style>
-@import url("@/assets/css/base.css");
+@import url("@assets/css/base.css");
 
 </style>

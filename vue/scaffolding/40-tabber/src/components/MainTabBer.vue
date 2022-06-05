@@ -5,10 +5,10 @@
 import Tabber from '@/components/tabber/TabBer';
 
 //icon图片
-import cart from "@/assets/img/home-bar/cart.svg"
-import cartActivate from "@/assets/img/home-bar/cart_activate.svg"
-import profile from "@/assets/img/home-bar/profile.svg"
-import profileActivate from "@/assets/img/home-bar/profile_activate.svg"
+import cart from "@assets/img/home-bar/cart.svg"
+import cartActivate from "@assets/img/home-bar/cart_activate.svg"
+import profile from "@assets/img/home-bar/profile.svg"
+import profileActivate from "@assets/img/home-bar/profile_activate.svg"
 
 export default{
   data(){
