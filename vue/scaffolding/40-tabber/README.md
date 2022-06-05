@@ -102,7 +102,7 @@ export default{
     },
     isActiveColor:{
       get(){
-        return this.isActive?{color:"#1296db"}:{color:"#000"};
+        return this.isActive?"#1296db":"#000";
       }
     }
   }

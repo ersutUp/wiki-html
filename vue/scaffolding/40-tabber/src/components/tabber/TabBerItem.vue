@@ -43,7 +43,7 @@ export default{
     },
     isActiveColor:{
       get(){
-        return this.isActive?{color:this.textActiveColor}:{color:this.textInvalidColor};
+        return this.isActive?this.textActiveColor:this.textInvalidColor;
       }
     }
   }
