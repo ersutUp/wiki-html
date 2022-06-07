@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ES6的异步处理</title>
+</head>
+<body>
+  <h1>看控制台</h1>
+  <button onclick="console.clear()">清理控制台</button>
+  <fieldset>
+    <legend>小demo</legend>
+    <button onclick="demo(true)">异步成功</button>
+    <button onclick="demo(false)">异步失败</button>
+  </fieldset>
+  <fieldset>
+    <legend>多层异步的嵌套</legend>
+    <button onclick="layers(1)">第一层失败</button>
+    <button onclick="layers(2)">第二层失败</button>
+    <button onclick="layers(3)">第三层失败</button>
+    <button onclick="layers(4)">第四层失败</button>
+  </fieldset>
+  <fieldset>
+    <legend>异步的数据处理</legend>
+    <button onclick="handleData(true)">成功的数据处理</button>
+    <button onclick="handleData(false)">失败的数据处理</button>
+  </fieldset>
+  <fieldset>
+    <legend>多个异步同时执行</legend>
+    <h3>任务全部成功时才执行成功回调，有一个任务执行失败就立马执行失败回调</h3>
+    <button onclick="asyncsAll(true)">成功回调</button>
+    <button onclick="asyncsAll(false)">失败回调</button>
+  </fieldset>
+</body>
+<script>
+
+function demo(flag){
+  console.info("进入demo");
+  new Promise((resolve,reject)=>{
+    console.info("开始异步demo");
+    setTimeout(() => {
+      if(flag){
+        resolve()
+      } else {
+        reject()
+      }
+    }, 1000);
+  }).then(() => {
+    console.info("异步成功的处理demo");
+  }).catch(() => {
+    console.info("异步失败的处理demo");
+  })
+  console.info("结束demo");
+}
+
+function handleData(flag){
+  const name = "handleData";
+  new Promise((resolve,reject)=>{
+    console.info(name+":开始异步");
+    setTimeout(() => {
+      if(flag){
+        resolve({msg:"成功"})
+      } else {
+        reject({msg:"失败"})
+      }
+    }, 1000);
+  }).then((data) => {
+    console.info(name+":异步成功的处理");
+    console.info(name+":异步成功的数据,data:",data);
+  }).catch((data) => {
+    console.info(name+":异步失败的处理");
+    console.info(name+":异步失败的数据,data:",data);
+  })
+}
+
+function layers(layerNum){
+  const name = "layers"
+  new Promise((resolve,reject)=>{
+    console.info(name+":第一层开始异步");
+    setTimeout(() => {
+      if(layerNum == 1){
+        reject()
+      } else {
+        resolve()
+      }
+    }, 1000);
+  }).then(() => {
+    console.info(name+":第一层-异步成功的处理");
+    return new Promise((resolve,reject)=>{
+      console.info(name+":第二层开始异步");
+      setTimeout(() => {
+        if(layerNum == 2){
+          reject()
+        } else {
+          resolve()
+        }
+      }, 1000);
+    })
+  }).then(() => {
+    console.info(name+":第二层-异步成功的处理");
+    return new Promise((resolve,reject)=>{
+      console.info(name+":第三层开始异步");
+      setTimeout(() => {
+        if(layerNum == 3){
+          reject()
+        } else {
+          resolve()
+        }
+      }, 1000);
+    })
+  }).catch(() => {
+    console.info(name+":异步失败统一的处理");
+  })
+}
+  
+function asyncsAll(flag){
+  Promise.all([
+    new Promise((resolve,reject) => {
+      setTimeout(() => {
+        resolve(1)
+      }, 1000);
+    }),
+    new Promise((resolve,reject) => {
+      setTimeout(() => {
+        resolve(2)
+      }, 2000);
+    }),
+    new Promise((resolve,reject) => {
+      setTimeout(() => {
+        if(flag){
+          resolve(3)
+        }else {
+          reject(3)
+        }
+      }, 500);
+    }),
+    new Promise((resolve,reject) => {
+      setTimeout(() => {
+        resolve(4)
+      }, 5000);
+    }),
+    new Promise((resolve,reject) => {
+      setTimeout(() => {
+        if(flag){
+          resolve(5)
+        }else {
+          reject(5)
+        }
+      }, 600);
+    }),
+  ]).then((results)=>{
+    console.info(results)
+  }).catch((error)=>{
+    console.info(error)
+  })
+}
+
+</script>
+</html>
