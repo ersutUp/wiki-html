@@ -2,7 +2,7 @@
   <Tabber :TabBerList="TabBerList" backgroundColor="#ccc"/>
 </template>
 <script>
-import Tabber from '@/components/tabber/TabBer';
+import Tabber from '@components/tabber/TabBer';
 
 //icon图片
 import cart from "@assets/img/home-bar/cart.svg"
