@@ -161,3 +161,11 @@
 
     1. [vuecli3配置](./vue-resolve-alias.md#vueCli3)
 
+38. [统一状态管理：pinia](./pinia.md)
+
+    1. 什么是pinia
+    1. 状态
+       1. 获取
+       1. 修改
+       1. 重置为初始值
+       1. 批量更新状态
