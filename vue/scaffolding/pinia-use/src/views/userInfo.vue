@@ -1,7 +1,7 @@
 <template>
 <div>
-  <span>名称:</span>
-  <span>{{name}}</span>
+  <span>姓名:</span>
+  <span>{{fullName}}</span>
 </div>
 <div>
   <span>年龄:</span>
@@ -9,7 +9,11 @@
 </div>
 <div>
   <span>爱好:</span>
-  <span>{{showHobby}}</span>
+  <span>{{showAllHobby}}</span>
+</div>
+<div>
+  <span>前二爱好:</span>
+  <span>{{showHobbys(2)}}</span>
 </div>
 <div>
   <span>新增爱好:</span>
@@ -20,8 +24,8 @@
 <script setup>
 import { computed } from 'vue';
 import { userStore } from '@/store/user'
-const {info,name,hobbys,newHobbyNum} = userStore()
+const {info,fullName,hobbys,newHobbyNum,showHobbys} = userStore()
 
-const showHobby = computed(() => hobbys.join(","))
+const showAllHobby = computed(() => hobbys.join(","))
 
 </script>

@@ -1,6 +1,10 @@
 <template>
 <div>
-  <label for="name">姓名</label>
+  <label for="surname">姓氏</label>
+  <input type="text" id="surname" v-model="surname"/>
+</div>
+<div>
+  <label for="name">名字</label>
   <input type="text" id="name" v-model="name"/>
 </div>
 <div>
@@ -25,7 +29,7 @@ const store = userStore()
 console.log("store",store)
 
 //通过 storeToRefs 将结构的值变为 ref 对象，这样修改值时同步到store中
-const {info,name} = storeToRefs(store)
+const {info,surname,name} = storeToRefs(store)
 console.log("name",name)
 
 console.log("info",info)

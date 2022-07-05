@@ -1,11 +1,11 @@
 <template>
 <div>
-  <label for="name">姓名</label>
-  <input type="text" id="name" v-model="name"/>
+  <label for="surname">姓氏</label>
+  <input type="text" id="surname" v-model="surname"/>
 </div>
 <div>
-  <label for="age">年龄</label>
-  <input type="number" id="age" v-model="info.age"/>
+  <label for="name">名字</label>
+  <input type="text" id="name" v-model="name"/>
 </div>
 <div>
   <span>爱好:</span>
@@ -28,7 +28,7 @@ const data = reactive({
 })
 
 const store = userStore()
-const {info,name,hobbys} = storeToRefs(store)
+const {info,surname,name,hobbys} = storeToRefs(store)
 
 function hobbyDel(index){
   hobbys.value.splice(index,1)
@@ -39,6 +39,10 @@ function addHobby(){
   store.$patch((state) =>{
     state.hobbys.push(data.newHobby)
     state.newHobbyNum++
+  })
+  store.$patch({
+    hobbys: store.hobbys,
+    newHobbyNum: store.newHobbyNum+1
   })
   data.newHobby = ""
 }
