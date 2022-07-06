@@ -1,5 +1,8 @@
 <template>
 <div>
+  <button @click="reset">重置</button>
+</div>
+<div>
   <label for="surname">姓氏</label>
   <input type="text" id="surname" v-model="surname"/>
 </div>
@@ -40,11 +43,18 @@ function addHobby(){
     state.hobbys.push(data.newHobby)
     state.newHobbyNum++
   })
+ /*
   store.$patch({
     hobbys: store.hobbys,
     newHobbyNum: store.newHobbyNum+1
   })
+  */
   data.newHobby = ""
+}
+
+function reset(){
+  //将所有状态重置为初始值
+  store.$reset()
 }
 
 </script>

@@ -10,8 +10,10 @@ createApp(App)
 .use(store)
 .mount('#app')
 
+const useUserStore = userStore()
 
-userStore().$subscribe((mutation, state) => {
+//状态的订阅
+useUserStore.$subscribe((mutation, state) => {
   /*
   mutation.storeId : store的id
   mutation.type : 通过哪种方式修改的，有三个值 
@@ -25,4 +27,28 @@ userStore().$subscribe((mutation, state) => {
 
   //store中的state
   console.log("state",state)
+})
+
+//action的订阅
+useUserStore.$onAction((obj) => {
+  const startTime = Date.now()
+
+  console.log("obj",obj)
+  //action的函数名
+  console.log("name",obj.name)
+  //调用action函数时传递的参数
+  console.log("args",obj.args)
+  //对应的store
+  console.log("store",obj.store)
+  
+  //action执行完成的回调
+  obj.after((result) => {
+    console.log(`action [${obj.name}], task time:[${Date.now()-startTime}ms], result -> [${result}]`)
+  })
+
+  //action出错时执行的回调
+  obj.onError((error) => {
+    console.warn(`action [${obj.name}] error msg:[${error}]`)
+  })
+  
 })

@@ -99,7 +99,7 @@
 27. webpack模块打包工具
     1. [介绍](./webpack/31-webpack-install.md)
     2. [安装](./webpack/31-webpack-install.md#install)
-    3. [基本使用与打包](./webpack/31-helloworld.md)
+    3. [基本使与打包](./webpack/31-helloworld.md)
     4. [webpack的配置文件（webpack.config.js）和node的配置文件（package.json）](./webpack/31-config.md)
 
 28. webpack的loader（装载器）
@@ -170,5 +170,8 @@
        1. 重置为初始值
        1. 批量更新状态
        1. 状态订阅
-    1. getter(类似计算属性)
+    1. getter：类似计算属性
        1. getter接收参数
+    1. action(行动)：类似component的method
+       1. action的使用
+       1. action的订阅

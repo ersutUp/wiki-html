@@ -1,46 +1,37 @@
 <template>
 <div>
   <label for="surname">姓氏</label>
-  <input type="text" id="surname" v-model="surname"/>
+  <input type="text" id="surname" v-model="data.surname"/>
 </div>
 <div>
   <label for="name">名字</label>
-  <input type="text" id="name" v-model="name"/>
-</div>
-<div>
-  <label for="age">年龄</label>
-  <input type="number" id="age" v-model="info.age"/>
+  <input type="text" id="name" v-model="data.name"/>
 </div>
 <div>
   <button @click="login">登录</button>
-  <button @click="reset">重置</button>
 </div>
 </template>
 
 <script setup>
 import { useRouter } from 'vue-router'
 import { userStore } from "@/store/user"
-import { storeToRefs } from 'pinia';
+import { reactive,ref } from 'vue';
+
+//reactive下的ref会自动解包无需.value
+const data = reactive({
+  name:ref(''),
+  surname:ref('')
+})
 
 const router = useRouter()
-
-const store = userStore()
-
-console.log("store",store)
-
-//通过 storeToRefs 将结构的值变为 ref 对象，这样修改值时同步到store中
-const {info,surname,name} = storeToRefs(store)
-console.log("name",name)
-
-console.log("info",info)
-console.log("info.age",info.value.age)
+const useUserStore = userStore()
 
 function login(){
-  router.replace("/user/info")
-}
-function reset(){
-  //将所有状态重置为初始值
-  store.$reset()
+  if (useUserStore.login(data.surname,data.name)){
+    router.replace("/user/info")
+  } else {
+    alert("登录失败")
+  }
 }
 
 </script>
