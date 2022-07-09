@@ -171,7 +171,11 @@
        1. 批量更新状态
        1. 状态订阅
     1. getter：类似计算属性
-       1. getter接收参数
+       1. getter的使用
+          1. getter接收参数
     1. action(行动)：类似component的method
        1. action的使用
        1. action的订阅
+    1. 自定义插件
+       1. 创建插件
+       1. 示例：利用插件实现state持久化

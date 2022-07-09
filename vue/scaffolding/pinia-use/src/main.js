@@ -51,4 +51,5 @@ useUserStore.$onAction((obj) => {
     console.warn(`action [${obj.name}] error msg:[${error}]`)
   })
   
+  //注意：after和onError只会执行一个55
 })

@@ -11,6 +11,10 @@
   <input type="text" id="name" v-model="name"/>
 </div>
 <div>
+  <label for="age">年龄</label>
+  <input type="number" id="age" v-model="info.age"/>
+</div>
+<div>
   <span>爱好:</span>
   <div v-for="(item,index) in hobbys">
     {{item}}
