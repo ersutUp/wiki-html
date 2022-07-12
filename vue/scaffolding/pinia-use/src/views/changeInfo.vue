@@ -35,6 +35,7 @@ const data = reactive({
 })
 
 const store = userStore()
+//通过storeToRefs获取ref类型，非ref包装的值无法实现响应式
 const {info,surname,name,hobbys} = storeToRefs(store)
 
 function hobbyDel(index){

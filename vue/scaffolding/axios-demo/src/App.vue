@@ -1,6 +1,9 @@
 <template>
   <nav>
-    <router-link to="/">hello-axios</router-link>
+    <router-link to="/">hello-axios</router-link>|
+    <router-link to="/config">带参数请求</router-link>|
+    <router-link to="/global-config">全局配置</router-link>|
+    <router-link to="/package">封装</router-link>|
   </nav>
   <router-view/>
 </template>

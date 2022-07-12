@@ -6,7 +6,22 @@ const routes = [
     path: '/',
     name: 'hello',
     component: HelloView
-  }
+  },
+  {
+    path: '/global-config',
+    name: 'global',
+    component: () => import("@/views/global-config")
+  },
+  {
+    path: '/config',
+    name: 'config',
+    component: () => import("@/views/config")
+  },
+  {
+    path: '/package',
+    name: 'package',
+    component: () => import("@/views/package")
+  },
 ]
 
 const router = createRouter({
