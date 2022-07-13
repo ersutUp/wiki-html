@@ -22,6 +22,11 @@ const routes = [
     name: 'package',
     component: () => import("@/views/package")
   },
+  {
+    path: '/interceptors',
+    name: 'interceptors',
+    component: () => import("@/views/interceptors")
+  },
 ]
 
 const router = createRouter({

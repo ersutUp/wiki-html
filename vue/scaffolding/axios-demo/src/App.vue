@@ -4,6 +4,7 @@
     <router-link to="/config">带参数请求</router-link>|
     <router-link to="/global-config">全局配置</router-link>|
     <router-link to="/package">封装</router-link>|
+    <router-link to="/interceptors">拦截器</router-link>|
   </nav>
   <router-view/>
 </template>
